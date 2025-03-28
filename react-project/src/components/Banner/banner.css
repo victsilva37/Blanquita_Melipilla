@@ -1,0 +1,21 @@
+#banner-content{
+    background-color: blue;
+}
+
+.carousel-inner{
+    max-height: 500px;
+}
+
+video {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+

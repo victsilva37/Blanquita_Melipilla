@@ -1,0 +1,22 @@
+#menu-content{
+    background-color: #0056D2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+ul{
+    display: flex;
+    justify-content: space-around;
+    width: 600px;
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    color: #FFFFFF;
+    text-decoration: none;
+}
