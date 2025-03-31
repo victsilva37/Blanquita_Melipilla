@@ -1,0 +1,34 @@
+#productos-content{
+    width: 100%;
+    height: 300px;
+    margin: auto;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #F4F4F4;
+    box-shadow: #0056D2;
+}
+
+#productos-content .card{
+    background-color: aliceblue;
+    width: 225px;
+    text-align: center;
+    border: 2px solid #0056D2;
+    margin: 10px;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+}
+
+#productos-content .card-body{
+    background-color: rgb(255, 255, 255);
+}
+
+#productos-content .card img{
+    max-width: 100px;
+    max-height: 400px;
+    align-self: center;
+}
+
+#productos-content .card h6{
+    font-size: 12px
+}
