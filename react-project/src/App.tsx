@@ -1,14 +1,18 @@
-import Banner from "./components/Banner/banner";
+import Banner from "./components/Banner";
+import Info from "./components/Info";
 import Menu from "./components/Menu";
+import Productos from "./components/Productos";
 
 
 
 function App() {
   return (
-    <div>
+    <>
       <Menu/>
       <Banner/>
-    </div>
+      <Info/>
+      <Productos/>
+    </>
     
   )
 }
