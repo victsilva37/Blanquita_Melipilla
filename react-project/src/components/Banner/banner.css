@@ -1,21 +1,40 @@
-#banner-content{
+/* #banner-content{
     background-color: blue;
-}
+} */
 
 .carousel-inner{
     max-height: 500px;
+    align-items: center;
 }
 
-video {
+
+h2{
+    text-align: center;
+}
+
+#banner-content {
+    position: relative;
+}
+
+.carousel-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.carousel-inner video,
+.carousel-inner img {
     width: 100%;
     height: auto;
     object-fit: cover;
 }
 
-img{
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
 
 
