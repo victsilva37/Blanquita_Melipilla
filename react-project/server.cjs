@@ -7,7 +7,12 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // Configuración de CORS
-app.use(cors());
+const corsOptions = {
+  origin: ['https://blanquitamelipilla-production.up.railway.app'],  // Permite CORS desde ambos dominios
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 // Configuración de PostgreSQL
