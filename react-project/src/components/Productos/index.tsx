@@ -20,12 +20,17 @@ function Productos() {
     axios.get("https://blanquitamelipilla-production.up.railway.app/api/productos")
       .then(response => {
         console.log("Datos recibidos:", response.data); 
-        setProductos(response.data); // Ahora TypeScript no dará errores
+        if (Array.isArray(response.data)) {
+          setProductos(response.data); // ✅ Solo si es un array
+        } else {
+          console.error("La respuesta no es un array:", response.data);
+        }
       })
       .catch(error => {
         console.error("Error al obtener productos:", error);
       });
   }, []);
+  
 
   const totalPaginas = Math.ceil(productos.length / productosPorPagina);
 
