@@ -1,0 +1,25 @@
+#card_contacto{
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content:start;
+    width: 50%;
+    margin: auto;
+    margin-top: 50px;
+}
+
+#card_contacto #img_dueno{
+    max-width: 400px;
+    max-height: 400px;
+}
+
+#card_contacto #icon1,
+#card_contacto #icon2{
+    max-width: 50px;
+    max-height: 50px;
+}
+
+#gmail-content,
+#wsp-content{
+    display: flex;
+    align-items: center;
+}

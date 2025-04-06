@@ -13,6 +13,8 @@ interface Producto {
 
 function Productos() {
   const [productos, setProductos] = useState<Producto[]>([]); // ✅ Ahora TypeScript sabe qué estructura tiene el array
+  const [paginaActual, setPaginaActual] = useState(1);
+  const productosPorPagina = 30;
 
   useEffect(() => {
     axios.get("http://localhost:5000/api/productos")
@@ -25,22 +27,43 @@ function Productos() {
       });
   }, []);
 
+  const totalPaginas = Math.ceil(productos.length / productosPorPagina);
+
+  const productosMostrados = productos.slice(
+    (paginaActual - 1) * productosPorPagina,
+    paginaActual * productosPorPagina
+  );
+
+  const cambiarPagina = (nuevaPagina: number) => {
+    if (nuevaPagina >= 1 && nuevaPagina <= totalPaginas) {
+      setPaginaActual(nuevaPagina);
+    }
+  };
+
   return (
-    <div id="productos-content">
-      {productos.length > 0 ? ( // ✅ Ya no dará error porque `productos` tiene un tipo definido
-        productos.map((producto) => (
-          <div key={producto.id_producto} className="card">
-            <h6 className="card-title">{producto.nombre_producto}</h6>
-            <img src={`/assets/${producto.img_producto}`} className="card-img-top" alt={producto.nombre_producto} />
-            <div className="card-body">
-              <h6 className="card-text">${producto.precio_unitario} c/u</h6>
+    <>
+      <div id="productos-content">
+        {productosMostrados.length > 0 ? ( // ✅ Ya no dará error porque `productos` tiene un tipo definido
+          productosMostrados.map((producto) => (
+            <div key={producto.id_producto} className="card">
+              <h6 className="card-title">{producto.nombre_producto}</h6>
+              <img src={`/assets/${producto.img_producto}`} className="card-img-top" alt={producto.nombre_producto} />
+              <div className="card-body">
+                <h6 className="card-text">${producto.precio_unitario} c/u</h6>
+              </div>
             </div>
-          </div>
-        ))
-      ) : (
-        <p>Cargando productos...</p>
-      )}
-    </div>
+          ))
+        ) : (
+          <p>Cargando productos...</p>
+        )}
+      </div>
+      <div className="paginacion">
+            <button onClick={() => cambiarPagina(paginaActual - 1)} disabled={paginaActual === 1}>Anterior</button>
+            <span>Página {paginaActual} de {totalPaginas}</span>
+            <button onClick={() => cambiarPagina(paginaActual + 1)} disabled={paginaActual === totalPaginas}>Siguiente</button>
+      </div>
+    </>
+   
   );
 }
 

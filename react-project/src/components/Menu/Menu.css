@@ -1,10 +1,15 @@
-#menu-content{
+#menu-content {
     background-color: #0056D2;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
-}
+    position: fixed;     /* 🔒 Fija el menú */
+    top: 0;              /* 🧭 Que quede arriba */
+    width: 100%;         /* 🧱 Ocupar todo el ancho */
+    z-index: 1000;       /* 🔝 Que esté por encima del resto */
+    padding: 15px 30px;  /* 🧘 Agrega espacio interno */
+  }
+  
 
 h1{
     color: white;

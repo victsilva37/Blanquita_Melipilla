@@ -8,7 +8,7 @@ function Menu(){
                 <nav>
                     <ul>
                         <li><a href="#inicio">Inicio</a></li>
-                        <li><a href="#productos">Productos</a></li>
+                        <li><a href="#catalogo">Catálogo</a></li>
                         <li><a href="#contacto">Contacto</a></li>
                     </ul>
                 </nav>
