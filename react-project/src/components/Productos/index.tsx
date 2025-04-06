@@ -17,7 +17,7 @@ function Productos() {
   const productosPorPagina = 30;
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/productos")
+    axios.get("https://blanquitamelipilla-production.up.railway.app/api/productos")
       .then(response => {
         console.log("Datos recibidos:", response.data); 
         setProductos(response.data); // Ahora TypeScript no dará errores
