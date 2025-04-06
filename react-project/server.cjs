@@ -8,8 +8,9 @@ const port = process.env.PORT || 5000;
 
 // Configuración de CORS
 const corsOptions = {
-  origin: ['https://blanquitamelipilla-production.up.railway.app'],  // Permite CORS desde ambos dominios
+  origin: ['http://localhost:5173', 'https://blanquitamelipilla-production.up.railway.app'],
 };
+
 
 app.use(cors(corsOptions));
 
