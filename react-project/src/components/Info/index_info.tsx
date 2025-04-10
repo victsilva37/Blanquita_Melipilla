@@ -1,7 +1,7 @@
 import img3 from '../../assets/img/img3_logo_inicio_1.png';
 import img4 from '../../assets/img/img4_logo_inicio_2.png';
 import img5 from '../../assets/img/img5_logo_inicio_3.png';
-import './info.css'
+import './styles_info.css'
 
 function Info(){
     return(
@@ -11,8 +11,8 @@ function Info(){
                 <img src={img3} alt="" />
                 <p>
                     <strong>
-                    Ofrecemos envases y troquelados prácticos y resistentes, <br />
-                    ideales para productos como papas fritas y pizzas individuales.
+                    Ofrecemos envases y troquelados prácticos y resistentes,<br />
+                    ideales para productos como papas fritas y pizzas <br /> individuales.
                     </strong>
                 </p>
             </div>

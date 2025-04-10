@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "./productos.css";
+import "./styles_productos.css";
 
 // Definir la interfaz para el producto
 interface Producto {
@@ -17,20 +17,15 @@ function Productos() {
   const productosPorPagina = 30;
 
   useEffect(() => {
-    axios.get("https://blanquitamelipilla-production.up.railway.app/api/productos")
+    axios.get("https://blanquitamelipillanode-production.up.railway.app/api/productos")
       .then(response => {
         console.log("Datos recibidos:", response.data); 
-        if (Array.isArray(response.data)) {
-          setProductos(response.data); // ✅ Solo si es un array
-        } else {
-          console.error("La respuesta no es un array:", response.data);
-        }
+        setProductos(response.data); // Ahora TypeScript no dará errores
       })
       .catch(error => {
         console.error("Error al obtener productos:", error);
       });
   }, []);
-  
 
   const totalPaginas = Math.ceil(productos.length / productosPorPagina);
 
@@ -52,7 +47,7 @@ function Productos() {
           productosMostrados.map((producto) => (
             <div key={producto.id_producto} className="card">
               <h6 className="card-title">{producto.nombre_producto}</h6>
-              <img src={`/assets/${producto.img_producto}`} className="card-img-top" alt={producto.nombre_producto} />
+              <img src={`/images/${producto.img_producto}`} className="card-img-top" alt={producto.nombre_producto} />
               <div className="card-body">
                 <h6 className="card-text">${producto.precio_unitario} c/u</h6>
               </div>

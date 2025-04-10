@@ -1,6 +1,5 @@
 import './banner.css'
-// import img1 from '../../assets/img/aa.png'
-import video1 from '../../assets/video/video1_banner.mp4'
+import img1 from '../../assets/img/img1_portada.png'
 import img2 from '../../assets/img/img2_banner.png'
 
 function Banner(){
@@ -12,7 +11,8 @@ function Banner(){
                         <h2>Envases y troquelados Blanquita Melipilla Spa</h2>
                     </div>
                     <div className="carousel-item active">
-                        <video src={video1} autoPlay muted loop playsInline></video>
+                        {/* <video src={video1} autoPlay muted loop playsInline></video> */}
+                        <img src={img1} alt="Producto" />
                     </div>
                     <div className="carousel-item">
                         <img src={img2} alt="Producto" />

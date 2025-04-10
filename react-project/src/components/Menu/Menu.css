@@ -1,31 +1,61 @@
 #menu-content {
     background-color: #0056D2;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    position: fixed;     /* 🔒 Fija el menú */
-    top: 0;              /* 🧭 Que quede arriba */
-    width: 100%;         /* 🧱 Ocupar todo el ancho */
-    z-index: 1000;       /* 🔝 Que esté por encima del resto */
-    padding: 15px 30px;  /* 🧘 Agrega espacio interno */
+    position: fixed; /* Fija el menú */
+    top: 0; /* Arriba de la pantalla */
+    width: 100%; /* Ocupa todo el ancho */
+    z-index: 1000; /* Por encima de otros elementos */
+    padding: 20px 20px; /* Espaciado interno */
+    box-sizing: border-box; /* Considera el padding en el ancho total */
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+
   }
   
 
-h1{
-    color: white;
-}
-
-ul{
+  nav ul {
     display: flex;
-    justify-content: space-around;
-    width: 600px;
-}
-
-li{
+    justify-content: center;
+    align-items: center;
+    gap: 75%; /* Espaciado entre elementos */
     list-style: none;
-}
-
-a{
-    color: #FFFFFF;
+    margin: 0; /* Sin margen extra */
+    padding: 0; /* Sin relleno interno */
+  }
+  
+  nav ul li {
+    flex-shrink: 0; /* Evita que los elementos se reduzcan demasiado */
+  }
+  
+  nav ul li a {
+    color: white;
     text-decoration: none;
-}
+    font-size: 15px; /* Tamaño adaptativo */
+    transition: color 0.3s; /* Transición suave al pasar el mouse */
+  }
+  
+  nav ul li a:hover {
+    color: #FFD700; /* Cambia el color al pasar el mouse */
+  }
+  
+  /* Ajustes automáticos para pantallas pequeñas */
+  @media (max-width: 768px) {
+    #menu-content {
+      flex-wrap: wrap; /* Permite que los elementos se ajusten en varias líneas */
+      justify-content: center; /* Centra el contenido */
+      padding: 10px; /* Reduce el padding */
+    }
+  
+    
+  
+    nav ul {
+      justify-content: center; /* Centra los elementos del menú */
+      gap: 10px; /* Reduce el espacio entre enlaces */
+    }
+  
+    nav ul li a {
+      font-size: calc(0.8rem + 0.5vw); /* Ajusta el tamaño del texto */
+    }
+  }
+  
