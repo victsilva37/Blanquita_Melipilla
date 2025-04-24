@@ -1,17 +1,21 @@
 #menu-content {
-    background-color: #0056D2;
+    background-color: #437cb1;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    position: fixed; /* Fija el menú */
+    position: fixed; 
     top: 0; /* Arriba de la pantalla */
     width: 100%; /* Ocupa todo el ancho */
     z-index: 1000; /* Por encima de otros elementos */
-    padding: 20px 20px; /* Espaciado interno */
     box-sizing: border-box; /* Considera el padding en el ancho total */
-    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
+}
 
-  }
+#menu-content img{
+  width: 100px;
+  height: 100px;
+}
+
   
 
   nav ul {

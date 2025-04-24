@@ -1,43 +1,46 @@
 #productos-content {
     width: 70%;
     margin: auto;
+    margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(6, 1fr); /* 6 columnas */
     gap: 10px;
-    background-color: #f4f4f4;
+    background-color: #ffffff;
     padding: 10px;
-    box-shadow: 2px 8px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 6px 6px 6px 6px rgba(0, 0, 0, 0.1);
   }
   
-#productos-content .card{
-    background-color: aliceblue;
+#productos-content #card-producto{
+    background-color: rgb(255, 255, 255);
     width: 175px;
     height: 250px;
-    text-align: center;
-    box-shadow: 0 2px 8px #0056D2;
+    box-shadow: 1px 2px #386299;
     margin: 10px;
     padding: 10px;
-    background-color: rgb(255, 255, 255);
 }
 
-#productos-content .card-body{
-    background-color: rgb(255, 255, 255);
-    width: 100px;
-    align-self: center;
-}
 
-#productos-content .card img{
+
+#productos-content #card-producto img{
     max-width: 100px;
-    max-height: 400px;
+    height: 150px;
     align-self: center;
 }
 
-#productos-content .card h6{
-    font-size: 10px
+
+#productos-content h6{
+    font-family: "Karantina", system-ui;
+    white-space: nowrap; 
+    font-size: 16px;
+    text-align: center;
 }
 
-#productos-content .card .card-text{
-    font-size: 15px
+#productos-content span{
+    font-family: "Karantina";
+    font-size: 25px;
+    font-weight: 300;
+    font-style: normal;
+    text-align: center;
 }
 
 
