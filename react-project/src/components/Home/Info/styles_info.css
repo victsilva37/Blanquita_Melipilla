@@ -1,21 +1,21 @@
-#card{
+#card-info{
     display: flex;
     width: 70%;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 50px;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
     text-align: center;
 }
 
     .card-body{
-        background-color: #F4F4F4;
-        max-width: 400px;
+        background-color: #f8f5f5;
+        width: 300px;
         height: 220px;
-        margin: 20px;
         padding: 20px;
         align-items: center;
-        box-shadow: 2px 8px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: 1px 2px 4px 2px #4f51c4;
     }
 
     .card-body img{

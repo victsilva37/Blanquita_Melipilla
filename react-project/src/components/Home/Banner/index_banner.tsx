@@ -1,6 +1,6 @@
 import './styles_banner.css'
-import img1 from '../../assets/img/img1_portada.png'
-import img2 from '../../assets/img/img2_banner.png'
+import img1 from '../../../assets/img/img1_portada.png'
+import img2 from '../../../assets/img/img2_banner.png'
 
 export default function Banner(){
     return(

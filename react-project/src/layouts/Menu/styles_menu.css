@@ -1,0 +1,95 @@
+#menu-content {
+    background-color: #4f51c4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed; 
+    top: 0; /* Arriba de la pantalla */
+    width: 100%; /* Ocupa todo el ancho */
+    z-index: 1000; /* Por encima de otros elementos */
+    box-sizing: border-box; /* Considera el padding en el ancho total */
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
+}
+
+#menu-content img{
+  width: 100px;
+  height: 100px;
+}
+
+
+
+
+  nav{
+    width: 70%;
+    margin: auto;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    list-style: none;
+    gap: 300px;
+  }
+
+   /*SECCIÓN: BARRA DE BÚSQUEDA*/
+
+      nav #buscador{
+        display: flex;
+        width: 500px;
+      }
+
+      nav #buscador button{
+        position: relative;
+        width: 50px;
+        z-index: 1000;
+        right: 50px;
+      }
+
+      nav #buscador button img{
+        width: 30px;
+        height: 30px;
+      }
+
+  /*SECCIÓN: MENÚ (OPCIÓN CATÁLOGO)*/
+
+      nav #section-catalogo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        gap: 5px;
+      }
+
+      nav #section-catalogo img{
+        width: 30px;
+        height: 30px;
+        align-self: center;
+      }
+
+      nav #section-catalogo a{
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        font-family: 'Karantina';
+        font-size: 25px;
+      }
+
+
+ 
+
+  
+  /* Ajustes automáticos para pantallas pequeñas */
+  @media (max-width: 768px) {
+    #menu-content {
+        flex-direction: row; /* Cambia a formato vertical */
+        padding: 10px;
+    }
+
+    nav {
+        flex-direction: row; /* Menú en columna */
+        gap: 15px;
+    }
+
+    nav #buscador {
+        width: 100%; /* Barra de búsqueda ocupa todo el ancho */
+    }
+  }
+  

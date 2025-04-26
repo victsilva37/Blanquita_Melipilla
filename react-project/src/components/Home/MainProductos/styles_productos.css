@@ -1,0 +1,52 @@
+#productos-content {
+    width: 70%;
+    height: auto;
+    margin: auto;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    background-color: #ffffff;
+    padding: 10px;
+    box-shadow: 1px 2px 4px 2px #4f51c4;
+  }
+  
+#productos-content #card-producto{
+    background-color: rgb(255, 255, 255);
+    width: 250px;
+    height: 300px;
+    border: 2px solid #4f51c4;
+    padding: 10px;
+}
+
+
+
+#productos-content #card-producto img{
+    max-width: 150px;
+    height: 200px;
+    align-self: center;
+}
+
+
+#productos-content h6{
+    font-family: "Karantina", system-ui;
+    white-space: nowrap; 
+    font-size: 16px;
+    text-align: center;
+}
+
+#productos-content span{
+    font-family: "Karantina";
+    font-size: 25px;
+    font-weight: 300;
+    font-style: normal;
+    text-align: center;
+}
+
+
+.paginacion{
+    width: 50%;
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+}

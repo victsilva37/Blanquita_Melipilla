@@ -2,17 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./styles_productos.css";
 import io from "socket.io-client";
+import { Producto } from "../../../interfaces/Producto";
 
-// Definir la interfaz para el producto
-interface Producto {
-  id_producto: number;
-  nombre_producto: string;
-  precio_unitario: number;
-  precio_x_mayor: number;
-  img_producto: string; // Aquí está el nombre de la imagen, no la cadena Base64
-}
-
-function Productos() {
+export default function MainProductos() {
   const [productos, setProductos] = useState<Producto[]>([]);
   const [paginaActual, setPaginaActual] = useState(1);
   const productosPorPagina = 30;
@@ -59,7 +51,7 @@ function Productos() {
     <>
       <div id="productos-content">
         {productosMostrados.length > 0 ? (
-          productosMostrados.map((producto) => (
+          productosMostrados.slice(0,3).map((producto) => (
             <div key={producto.id_producto} className="card" id="card-producto">
               
               {/* Cambiar a la URL de la imagen en el servidor */}
@@ -79,19 +71,8 @@ function Productos() {
           <p>Cargando productos...</p>
         )}
       </div>
-      {/* <div className="paginacion">
-        <button onClick={() => cambiarPagina(paginaActual - 1)} disabled={paginaActual === 1}>
-          Anterior
-        </button>
-        <span>
-          Página {paginaActual} de {totalPaginas}
-        </span>
-        <button onClick={() => cambiarPagina(paginaActual + 1)} disabled={paginaActual === totalPaginas}>
-          Siguiente
-        </button>
-      </div> */}
     </>
   );
 }
 
-export default Productos;
+

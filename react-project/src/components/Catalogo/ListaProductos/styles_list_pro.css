@@ -1,41 +1,39 @@
-#productos-content {
+#list-productos-content{
     width: 70%;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 150px;
     display: grid;
     grid-template-columns: repeat(6, 1fr); /* 6 columnas */
     gap: 10px;
     background-color: #ffffff;
     padding: 10px;
-    box-shadow: 6px 6px 6px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-#productos-content #card-producto{
+    box-shadow: 1px 2px 4px 2px #4f51c4;
+}
+
+#list-productos-content #card-list-productos{
     background-color: rgb(255, 255, 255);
     width: 175px;
     height: 250px;
-    box-shadow: 1px 2px #386299;
+    border: 2px solid #4f51c4;
     margin: 10px;
     padding: 10px;
 }
 
-
-
-#productos-content #card-producto img{
+#list-productos-content #card-list-productos img{
     max-width: 100px;
     height: 150px;
     align-self: center;
 }
 
 
-#productos-content h6{
+#list-productos-content h6{
     font-family: "Karantina", system-ui;
     white-space: nowrap; 
     font-size: 16px;
     text-align: center;
 }
 
-#productos-content span{
+#list-productos-content span{
     font-family: "Karantina";
     font-size: 25px;
     font-weight: 300;
@@ -43,10 +41,10 @@
     text-align: center;
 }
 
-
+/* 
 .paginacion{
     width: 50%;
     margin: auto;
     margin-top: 20px;
     text-align: center;
-}
+} */
