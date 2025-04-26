@@ -49,9 +49,9 @@ export default function MainProductos() {
 
   return (
     <>
-      <div id="productos-content">
+      <div id="productos-content" >
         {productosMostrados.length > 0 ? (
-          productosMostrados.slice(0,3).map((producto) => (
+          productosMostrados.slice(0,4).map((producto) => (
             <div key={producto.id_producto} className="card" id="card-producto">
               
               {/* Cambiar a la URL de la imagen en el servidor */}

@@ -44,6 +44,16 @@ export default function ListaProductos(){
       paginaActual * productosPorPagina
     );
 
+    // Calcular total de páginas
+    const totalPaginas = Math.ceil(productos.length / productosPorPagina);
+
+    // Manejar el cambio de página
+    const cambiarPagina = (nuevaPagina: number) => {
+        if (nuevaPagina > 0 && nuevaPagina <= totalPaginas) {
+            setPaginaActual(nuevaPagina);
+        }
+    };
+
     //2. INTERFAZ DE USUARIO
     return(
         <>
@@ -70,6 +80,25 @@ export default function ListaProductos(){
                 <p>Cargando productos...</p>
                 )}
             </div>
+
+            {/* Mostrar paginación solo si hay más de 30 productos */}
+            {productos.length > productosPorPagina && (
+                <div className="paginacion">
+                    <button
+                        onClick={() => cambiarPagina(paginaActual - 1)}
+                        disabled={paginaActual === 1}
+                    >
+                        Anterior
+                    </button>
+                    <span>Página {paginaActual} de {totalPaginas}</span>
+                    <button
+                        onClick={() => cambiarPagina(paginaActual + 1)}
+                        disabled={paginaActual === totalPaginas}
+                    >
+                        Siguiente
+                    </button>
+                </div>
+            )}
     </>
 
     )

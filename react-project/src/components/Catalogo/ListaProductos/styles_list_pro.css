@@ -1,9 +1,12 @@
 #list-productos-content{
     width: 70%;
-    margin: auto;
+    align-self: center;
     margin-top: 150px;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr); /* 6 columnas */
+    /* display: grid;
+    grid-template-columns: repeat(6, 1fr);  */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 10px;
     background-color: #ffffff;
     padding: 10px;
