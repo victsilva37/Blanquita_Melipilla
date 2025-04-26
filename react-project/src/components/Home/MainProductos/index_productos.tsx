@@ -6,7 +6,7 @@ import { Producto } from "../../../interfaces/Producto";
 
 export default function MainProductos() {
   const [productos, setProductos] = useState<Producto[]>([]);
-  const [paginaActual, setPaginaActual] = useState(1);
+  const [paginaActual] = useState(1);
   const productosPorPagina = 30;
 
   useEffect(() => {
@@ -39,6 +39,7 @@ export default function MainProductos() {
   const productosMostrados = productos.slice(
     (paginaActual - 1) * productosPorPagina,
     paginaActual * productosPorPagina
+  
   );
 
   // const cambiarPagina = (nuevaPagina: number) => {
