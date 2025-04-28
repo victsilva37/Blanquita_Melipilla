@@ -11,7 +11,7 @@ export default function MainProductos() {
 
   useEffect(() => {
     // Conectar a WebSocket para recibir nuevos productos
-    const socket = io("https://mi-subdominio-unico.loca.lt");
+    const socket = io("https://blanquitamelipillanode-production.up.railway.app");
 
     // Escuchar el evento 'nuevoProducto' y agregar el nuevo producto al estado
     socket.on("nuevoProducto", (nuevoProducto: Producto) => {
@@ -19,7 +19,7 @@ export default function MainProductos() {
     });
 
     // Obtener los productos iniciales desde el servidor
-    axios.get("https://mi-subdominio-unico.loca.lt/api/productos")
+    axios.get("https://blanquitamelipillanode-production.up.railway.app/api/productos")
       .then(response => {
         console.log("Datos recibidos:", response.data);
         setProductos(response.data); // Ahora TypeScript no dará errores
