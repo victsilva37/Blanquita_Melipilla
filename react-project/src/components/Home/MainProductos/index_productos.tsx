@@ -57,7 +57,7 @@ export default function MainProductos() {
               
               {/* Cambiar a la URL de la imagen en el servidor */}
               <img
-                src={`https://mi-subdominio-unico.loca.lt/${producto.img_producto}`} // Acceder a la imagen desde la carpeta uploads
+                src={`https://blanquitamelipillanode-production.up.railway.app/${producto.img_producto}`} // Acceder a la imagen desde la carpeta uploads
                 className="card-img-top"
                 alt={producto.nombre_producto}
               />
