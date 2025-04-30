@@ -21,7 +21,6 @@ export default function MainProductos() {
     // Obtener los productos iniciales desde el servidor
     axios.get("https://blanquitamelipillanode-production.up.railway.app/api/productos")
       .then(response => {
-        console.log("Datos recibidos:", response.data);
         setProductos(response.data); // Ahora TypeScript no dará errores
       })
       .catch(error => {
@@ -34,7 +33,6 @@ export default function MainProductos() {
     };
   }, []);
 
-  // const totalPaginas = Math.ceil(productos.length / productosPorPagina);
 
   const productosMostrados = productos.slice(
     (paginaActual - 1) * productosPorPagina,
@@ -42,11 +40,6 @@ export default function MainProductos() {
   
   );
 
-  // const cambiarPagina = (nuevaPagina: number) => {
-  //   if (nuevaPagina >= 1 && nuevaPagina <= totalPaginas) {
-  //     setPaginaActual(nuevaPagina);
-  //   }
-  // };
 
   return (
     <>
