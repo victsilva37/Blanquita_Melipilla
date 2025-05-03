@@ -21,14 +21,14 @@
 }
 
 
-
+/* img: Imagen  del producto en el servidor */
 #productos-content #card-producto img{
     max-width: 150px;
     height: 200px;
     align-self: center;
 }
 
-
+/* h6: Nombre del producto */
 #productos-content h6{
     font-family: "Karantina", system-ui;
     white-space: nowrap; 
@@ -36,6 +36,7 @@
     text-align: center;
 }
 
+/* span: Precio unitario */
 #productos-content span{
     font-family: "Karantina";
     font-size: 25px;

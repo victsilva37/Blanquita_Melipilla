@@ -63,7 +63,6 @@ export default function ListaProductos({ searchTerm }: ListaProductosProps) {
     // 2. INTERFAZ DE USUARIO
     return (
         <>
-        
             <div id="list-productos-content">
                 {productosMostrados.length > 0 ? (
                     productosMostrados.map((producto) => (
@@ -91,19 +90,12 @@ export default function ListaProductos({ searchTerm }: ListaProductosProps) {
             {/* Mostrar paginación solo si hay más de 30 productos */}
             {productosFiltrados.length > productosPorPagina && (
                 <div className="paginacion">
-                    <button
-                        onClick={() => cambiarPagina(paginaActual - 1)}
-                        disabled={paginaActual === 1}
-                    >
-                        Anterior
-                    </button>
+
+                    <button onClick={() => cambiarPagina(paginaActual - 1)} disabled={paginaActual === 1}>Anterior</button>
                     <span>Página {paginaActual} de {totalPaginas}</span>
-                    <button
-                        onClick={() => cambiarPagina(paginaActual + 1)}
-                        disabled={paginaActual === totalPaginas}
-                    >
-                        Siguiente
-                    </button>
+
+                    <button onClick={() => cambiarPagina(paginaActual + 1)} disabled={paginaActual === totalPaginas}>Siguiente</button>
+
                 </div>
             )}
         </>

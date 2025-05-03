@@ -5,68 +5,84 @@ import io from "socket.io-client";
 import { Producto } from "../../../interfaces/Producto";
 
 export default function MainProductos() {
-  const [productos, setProductos] = useState<Producto[]>([]);
-  const [paginaActual] = useState(1);
-  const productosPorPagina = 30;
 
-  useEffect(() => {
-    // Conectar a WebSocket para recibir nuevos productos
-    const socket = io("https://blanquitamelipillanode-production.up.railway.app");
+  /*------------------------------------------------------------------------------------
+    ----------------------------Inicio LÓGICA-------------------------------------------
+    ------------------------------------------------------------------------------------*/
+    const [productos, setProductos] = useState<Producto[]>([]);
+    const [paginaActual] = useState(1);
+    const productosPorPagina = 30;
 
-    // Escuchar el evento 'nuevoProducto' y agregar el nuevo producto al estado
-    socket.on("nuevoProducto", (nuevoProducto: Producto) => {
-      setProductos(prevProductos => [...prevProductos, nuevoProducto]);
-    });
+    useEffect(() => {
+      // Conectar a WebSocket para recibir nuevos productos
+      const socket = io("https://blanquitamelipillanode-production.up.railway.app");
 
-    // Obtener los productos iniciales desde el servidor
-    axios.get("https://blanquitamelipillanode-production.up.railway.app/api/productos")
-      .then(response => {
-        setProductos(response.data); // Ahora TypeScript no dará errores
-      })
-      .catch(error => {
-        console.error("Error al obtener productos:", error);
+      // Escuchar el evento 'nuevoProducto' y agregar el nuevo producto al estado
+      socket.on("nuevoProducto", (nuevoProducto: Producto) => {
+        setProductos(prevProductos => [...prevProductos, nuevoProducto]);
       });
 
-    // Limpiar la conexión del WebSocket cuando el componente se desmonte
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+      // Obtener los productos iniciales desde el servidor
+      axios.get("https://blanquitamelipillanode-production.up.railway.app/api/productos")
+        .then(response => {
+          setProductos(response.data); // Ahora TypeScript no dará errores
+        })
+        .catch(error => {
+          console.error("Error al obtener productos:", error);
+        });
+
+      // Limpiar la conexión del WebSocket cuando el componente se desmonte
+      return () => {
+        socket.disconnect();
+      };
+    }, []);
+
+    const productosMostrados = productos.slice(
+      (paginaActual - 1) * productosPorPagina,
+      paginaActual * productosPorPagina
+    );
+  /*------------------------------------------------------------------------------------
+    ---------------------------- Fin LÓGICA---------------------------------------------
+    ------------------------------------------------------------------------------------*/
 
 
-  const productosMostrados = productos.slice(
-    (paginaActual - 1) * productosPorPagina,
-    paginaActual * productosPorPagina
-  
-  );
 
+  /*------------------------------------------------------------------------------------
+    ------------------------------Inicio VISTA------------------------------------------
+    ------------------------------------------------------------------------------------*/
+    return (
+      <>
+        <div id="productos-content" >
+          {productosMostrados.length > 0 ? (
+            productosMostrados.slice(0,4).map((producto) => (
+              <div key={producto.id_producto} className="card" id="card-producto">
+                
+                {/* img: Imagen  del producto en el servidor */}
+                <img
+                 // Acceder a la imagen desde la carpeta uploads
+                  src={`https://blanquitamelipillanode-production.up.railway.app${producto.img_producto}`}
+                  className="card-img-top"
+                  alt={producto.nombre_producto}
+                />
+                
+                {/* h6: Nombre del producto */}
+                <h6 className="card-title">{producto.nombre_producto}</h6>
+                
+                {/* span: Precio unitario */}
+                <span>${Math.trunc(producto.precio_unitario)} c/u</span>
+                
+              </div>
+            ))
+          ) : (
+            <p>Cargando productos...</p>
+          )}
+        </div>
+      </>
+    );
+   /*------------------------------------------------------------------------------------
+    ------------------------------Fin VISTA----------------------------------------------
+    ------------------------------------------------------------------------------------*/
 
-  return (
-    <>
-      <div id="productos-content" >
-        {productosMostrados.length > 0 ? (
-          productosMostrados.slice(0,4).map((producto) => (
-            <div key={producto.id_producto} className="card" id="card-producto">
-              
-              {/* Cambiar a la URL de la imagen en el servidor */}
-              <img
-                src={`https://blanquitamelipillanode-production.up.railway.app${producto.img_producto}`} // Acceder a la imagen desde la carpeta uploads
-                className="card-img-top"
-                alt={producto.nombre_producto}
-              />
-
-              <h6 className="card-title">{producto.nombre_producto}</h6>
-              
-              <span>${Math.trunc(producto.precio_unitario)} c/u</span>
-              
-            </div>
-          ))
-        ) : (
-          <p>Cargando productos...</p>
-        )}
-      </div>
-    </>
-  );
 }
 
 
