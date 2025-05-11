@@ -75,11 +75,14 @@ export default function ListaProductos({ searchTerm }: ListaProductosProps) {
 
                             {/* Cambiar a la URL de la imagen en el servidor */}
                             <img
-                                src={`https://blanquitamelipillanode-production.up.railway.app${producto.img_producto}`} // Acceder a la imagen desde la carpeta uploads
+                                src={`${producto.img_producto.startsWith("http") 
+                                        ? producto.img_producto 
+                                        : `https://blanquitamelipillanode-production.up.railway.app${producto.img_producto}`}`}
                                 className="card-img-top"
-                                id='img_productos-tag'
+                                id="img_productos-tag"
                                 alt={producto.nombre_producto}
                             />
+
 
                             <h6 className="card-title">{producto.nombre_producto}</h6>
 
