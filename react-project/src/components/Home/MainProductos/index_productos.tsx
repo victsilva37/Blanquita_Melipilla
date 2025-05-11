@@ -3,14 +3,19 @@ import axios from "axios";
 import "./styles_productos.css";
 import io from "socket.io-client";
 import { Producto } from "../../../interfaces/Producto";
-import ENV from "../../../../entorno"; // Ajusta el path según la ubicación de entorno.ts
+
+
+const API_TOKEN = import.meta.env.VITE_API_TOKEN;
 
 
 export default function MainProductos() {
 
+  
   /*------------------------------------------------------------------------------------
     ----------------------------Inicio LÓGICA-------------------------------------------
     ------------------------------------------------------------------------------------*/
+    
+
     const [productos, setProductos] = useState<Producto[]>([]);
     const [paginaActual] = useState(1);
     const productosPorPagina = 30;
@@ -26,7 +31,7 @@ export default function MainProductos() {
 
         // Obtener los productos iniciales desde el servidor
         axios.get("https://blanquitamelipillanode-production.up.railway.app/api/productos",  {
-                headers: { Authorization: `Bearer ${ENV.API_TOKEN}` },
+                headers: { Authorization: `Bearer ${API_TOKEN}` },
           })
         .then(response => {
           setProductos(response.data); // Ahora TypeScript no dará errores

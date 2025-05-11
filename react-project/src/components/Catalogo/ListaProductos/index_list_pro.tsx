@@ -3,12 +3,14 @@ import { Producto } from "../../../interfaces/Producto";
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 import './styles_list_pro.css'
-import ENV from "../../../../entorno";
 
 // Definir las props que espera ListaProductos
 interface ListaProductosProps {
     searchTerm: string; // Prop para el término de búsqueda
 }
+
+const API_TOKEN = import.meta.env.VITE_API_TOKEN;
+
 
 export default function ListaProductos({ searchTerm }: ListaProductosProps) {
 
@@ -27,7 +29,7 @@ export default function ListaProductos({ searchTerm }: ListaProductosProps) {
 
         // Obtener los productos iniciales desde el servidor
         axios.get("https://blanquitamelipillanode-production.up.railway.app/api/productos", {
-                headers: { Authorization: `Bearer ${ENV.API_TOKEN}` },
+                headers: { Authorization: `Bearer ${API_TOKEN}` },
           })
             .then(response => {
                 console.log("Datos recibidos:", response.data);
