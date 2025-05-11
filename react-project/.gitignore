@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 #Proyecto
-.env
+entorno.ts

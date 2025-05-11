@@ -3,6 +3,8 @@ import axios from "axios";
 import "./styles_productos.css";
 import io from "socket.io-client";
 import { Producto } from "../../../interfaces/Producto";
+import ENV from "../../../../entorno"; // Ajusta el path según la ubicación de entorno.ts
+
 
 export default function MainProductos() {
 
@@ -22,8 +24,10 @@ export default function MainProductos() {
         setProductos(prevProductos => [...prevProductos, nuevoProducto]);
       });
 
-      // Obtener los productos iniciales desde el servidor
-      axios.get("https://blanquitamelipillanode-production.up.railway.app/api/productos")
+        // Obtener los productos iniciales desde el servidor
+        axios.get("https://blanquitamelipillanode-production.up.railway.app/api/productos",  {
+                headers: { Authorization: `Bearer ${ENV.API_TOKEN}` },
+          })
         .then(response => {
           setProductos(response.data); // Ahora TypeScript no dará errores
         })
