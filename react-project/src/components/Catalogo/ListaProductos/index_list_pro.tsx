@@ -77,7 +77,7 @@ export default function ListaProductos({ searchTerm }: ListaProductosProps) {
                             <img
                                 src={`${producto.img_producto.startsWith("http") 
                                         ? producto.img_producto 
-                                        : `https://blanquitamelipillanode-production.up.railway.app${producto.img_producto}`}`}
+                                        : `https://blanquitamelipillanode-production.up.railway.app/uploads/${producto.img_producto}`}`}
                                 className="card-img-top"
                                 id="img_productos-tag"
                                 alt={producto.nombre_producto}
