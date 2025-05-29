@@ -8,7 +8,7 @@
     width: 100%; /* Ocupa todo el ancho */
     z-index: 1000; /* Por encima de otros elementos */
     box-sizing: border-box; /* Considera el padding en el ancho total */
-    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.1);
 }
 
 /*LOGO BLANQUITA*/
