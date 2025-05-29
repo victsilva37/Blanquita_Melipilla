@@ -10,6 +10,7 @@ interface ListaProductosProps {
 }
 
 const API_TOKEN = import.meta.env.VITE_API_TOKEN;
+const FRONT_URL = import.meta.env.FRONTEND_URL;
 
 
 export default function ListaProductos({ searchTerm }: ListaProductosProps) {
@@ -20,7 +21,7 @@ export default function ListaProductos({ searchTerm }: ListaProductosProps) {
 
     useEffect(() => {
         // Conectar a WebSocket para recibir nuevos productos
-        const socket = io("https://blanquitamelipillanode-production.up.railway.app");
+        const socket = io(FRONT_URL);
 
         // Escuchar el evento 'nuevoProducto' y agregar el nuevo producto al estado
         socket.on("nuevoProducto", (nuevoProducto: Producto) => {
