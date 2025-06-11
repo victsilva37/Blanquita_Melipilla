@@ -3,9 +3,7 @@ html, body, #root {
     margin: 0;    /* Eliminar márgenes */
     display: flex;
     flex-direction: column; /* Organización en columna */
-    background-image: url(assets/img/fondo_pagina.png);
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: whitesmoke
 }
 
 

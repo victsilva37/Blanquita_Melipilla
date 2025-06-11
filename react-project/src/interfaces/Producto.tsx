@@ -5,4 +5,5 @@ export interface Producto {
     precio_unitario: number;
     precio_x_mayor: number;
     img_producto: string; // Aquí está el nombre de la imagen, no la cadena Base64
+    cantidad_por_paquete: number;
 }

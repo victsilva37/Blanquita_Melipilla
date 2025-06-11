@@ -2,20 +2,23 @@
     width: 70%;
     height: auto;
     margin: auto;
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: center;
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    flex-wrap: wrap;
+    justify-content: start;
     gap: 50px;
-    background-color: #ffffff;
-    padding: 10px;
+    background-color: rgb(240, 232, 232);
     box-shadow: 1px 2px 4px 2px #4f51c4;
-  }
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
   
 #productos-content #card-producto{
-    background-color: rgb(253, 251, 251);
-    width: 250px;
-    height: 300px;
+    background-color: rgb(251, 252, 253);
+    width: 200px;
+    max-height: 400px;
     box-shadow: 1px 2px 4px 2px #cdcdf3;
     padding: 10px;
 }
@@ -23,23 +26,32 @@
 
 /* img: Imagen  del producto en el servidor */
 #productos-content #card-producto img{
-    max-width: 150px;
+    width: 100%;
     height: 200px;
     align-self: center;
 }
 
 /* h6: Nombre del producto */
-#productos-content h6{
+#productos-content h4{
     font-family: "Karantina", system-ui;
     white-space: nowrap; 
-    font-size: 16px;
+    font-size: 20px;
     text-align: center;
+}
+
+#productos-content p{
+    font-family: "Karantina", system-ui;
+    font-weight: 100;
+    text-align: center;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
 }
 
 /* span: Precio unitario */
 #productos-content span{
     font-family: "Karantina";
-    font-size: 25px;
+    font-size: 30px;
     font-weight: 300;
     font-style: normal;
     text-align: center;

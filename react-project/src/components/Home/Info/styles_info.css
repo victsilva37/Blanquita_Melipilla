@@ -12,7 +12,7 @@
 }
 
     .card-body{
-        background-color: #073d83;
+        background-color: rgb(240, 232, 232);
         width: 300px;
         height: 220px;
         padding: 20px;
@@ -29,7 +29,7 @@
         margin-top: 20px;
         font-size: 20px;
         text-align: center;
-        color: rgb(242, 243, 243);
+        color: rgb(18, 39, 39);
         font-family: "Karantina";
         font-weight: 100;
     }
