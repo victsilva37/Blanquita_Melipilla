@@ -31,7 +31,7 @@ export default function MainProductos() {
       });
 
         // Obtener los productos iniciales desde el servidor
-        axios.get("https://blanquitamelipillanode-production.up.railway.app/api/productos",  {
+        axios.get("https://backend-node-wfhw.onrender.com/api/productos",  {
                 headers: { Authorization: `Bearer ${API_TOKEN}` },
           })
         .then(response => {
@@ -70,7 +70,7 @@ export default function MainProductos() {
                 {/* img: Imagen  del producto en el servidor */}
                 <img
                  // Acceder a la imagen desde la carpeta uploads
-                  src={`https://blanquitamelipillanode-production.up.railway.app${producto.img_producto}`}
+                  src={`https://backend-node-wfhw.onrender.com${producto.img_producto}`}
                   className="card-img-top"
                   alt={producto.nombre_producto}
                 />
