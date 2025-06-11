@@ -69,6 +69,10 @@ app.get('/api/productos', authenticateToken, async (req, res) => {
     const productos = result.rows.map((producto) => ({
       ...producto,
       img_producto: `/uploads/${producto.img_producto}`,
+      precio_total:
+        producto.cantidad_por_paquete > 1
+          ? producto.precio_unitario * producto.cantidad_por_paquete
+          : producto.precio_unitario,
     }));
 
     res.status(200).json(productos);
@@ -78,11 +82,19 @@ app.get('/api/productos', authenticateToken, async (req, res) => {
   }
 });
 
-app.post('/api/productos', authenticateToken, async (req, res) => {
-  const { nombre_producto, precio_unitario, precio_x_mayor, img_producto } = req.body;
 
-  if (!nombre_producto || !precio_unitario || !precio_x_mayor || !img_producto) {
-    return res.status(400).json({ message: 'Todos los campos son obligatorios.' });
+app.post('/api/productos', authenticateToken, async (req, res) => {
+  const {
+    nombre_producto,
+    precio_unitario,
+    precio_x_mayor,
+    img_producto,
+    cantidad_por_paquete = 1,
+    stock = 0,
+  } = req.body;
+
+  if (!nombre_producto || !precio_unitario || !img_producto) {
+    return res.status(400).json({ message: 'Faltan campos obligatorios.' });
   }
 
   try {
@@ -93,15 +105,17 @@ app.post('/api/productos', authenticateToken, async (req, res) => {
     await sharp(imgBuffer).resize(500).toFile(imagePath);
 
     const query = `
-      INSERT INTO producto (nombre_producto, precio_unitario, precio_x_mayor, img_producto)
-      VALUES ($1, $2, $3, $4)
+      INSERT INTO producto (nombre_producto, precio_unitario, precio_x_mayor, img_producto, cantidad_por_paquete, stock)
+      VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING *;
     `;
     const values = [
       nombre_producto,
       parseFloat(precio_unitario),
-      parseFloat(precio_x_mayor),
+      parseFloat(precio_x_mayor || 0),
       imagenNombre,
+      parseInt(cantidad_por_paquete),
+      parseInt(stock),
     ];
 
     const result = await pool.query(query, values);
@@ -114,91 +128,63 @@ app.post('/api/productos', authenticateToken, async (req, res) => {
   }
 });
 
-app.patch('/api/productos/:id', authenticateToken, async (req, res) => {
-  const { id } = req.params; // ID del producto a actualizar
-  const { nombre_producto, precio_unitario, precio_x_mayor } = req.body;
 
-  // Verificar que al menos uno de los campos a actualizar esté presente
-  if (!nombre_producto && precio_unitario === undefined && precio_x_mayor === undefined) {
-    return res.status(400).json({
-      message: 'Debes proporcionar al menos uno de los campos: nombre_producto, precio_unitario o precio_x_mayor.',
-    });
+app.patch('/api/productos/:id', authenticateToken, async (req, res) => {
+  const { id } = req.params;
+  const { nombre_producto, precio_unitario, precio_x_mayor, cantidad_por_paquete, stock } = req.body;
+
+  const fieldsToUpdate = [];
+  const values = [];
+  let queryIndex = 1;
+
+  if (nombre_producto) {
+    fieldsToUpdate.push(`nombre_producto = $${queryIndex}`);
+    values.push(nombre_producto);
+    queryIndex++;
+  }
+  if (precio_unitario !== undefined) {
+    fieldsToUpdate.push(`precio_unitario = $${queryIndex}`);
+    values.push(parseFloat(precio_unitario));
+    queryIndex++;
+  }
+  if (precio_x_mayor !== undefined) {
+    fieldsToUpdate.push(`precio_x_mayor = $${queryIndex}`);
+    values.push(parseFloat(precio_x_mayor));
+    queryIndex++;
+  }
+  if (cantidad_por_paquete !== undefined) {
+    fieldsToUpdate.push(`cantidad_por_paquete = $${queryIndex}`);
+    values.push(parseInt(cantidad_por_paquete));
+    queryIndex++;
+  }
+  if (stock !== undefined) {
+    fieldsToUpdate.push(`stock = $${queryIndex}`);
+    values.push(parseInt(stock));
+    queryIndex++;
   }
 
+  if (fieldsToUpdate.length === 0) {
+    return res.status(400).json({ message: 'No se proporcionaron campos para actualizar.' });
+  }
+
+  const updateQuery = `
+    UPDATE producto
+    SET ${fieldsToUpdate.join(', ')}
+    WHERE id = $${queryIndex}
+    RETURNING *;
+  `;
+  values.push(id);
+
   try {
-    // Consultar el producto para verificar si existe
-    const productoExistente = await pool.query('SELECT * FROM producto WHERE id = $1;', [id]);
-    if (productoExistente.rows.length === 0) {
-      return res.status(404).json({ message: 'Producto no encontrado.' });
-    }
-
-    // Construcción de la consulta dinámica
-    const fieldsToUpdate = [];
-    const values = [];
-    let queryIndex = 1;
-
-    if (nombre_producto) {
-      fieldsToUpdate.push(`nombre_producto = $${queryIndex}`);
-      values.push(nombre_producto);
-      queryIndex++;
-    }
-
-    if (precio_unitario !== undefined) {
-      const precioUnitarioParsed = parseFloat(precio_unitario);
-      if (isNaN(precioUnitarioParsed) || precioUnitarioParsed < 0) {
-        return res.status(400).json({
-          message: 'El precio unitario debe ser un número válido y mayor o igual a cero.',
-        });
-      }
-      fieldsToUpdate.push(`precio_unitario = $${queryIndex}`);
-      values.push(precioUnitarioParsed);
-      queryIndex++;
-    }
-
-    if (precio_x_mayor !== undefined) {
-      const precioPorMayorParsed = parseFloat(precio_x_mayor);
-      if (isNaN(precioPorMayorParsed) || precioPorMayorParsed < 0) {
-        return res.status(400).json({
-          message: 'El precio por mayor debe ser un número válido y mayor o igual a cero.',
-        });
-      }
-      fieldsToUpdate.push(`precio_x_mayor = $${queryIndex}`);
-      values.push(precioPorMayorParsed);
-      queryIndex++;
-    }
-
-    // Verificar que haya campos para actualizar
-    if (fieldsToUpdate.length === 0) {
-      return res.status(400).json({
-        message: 'No se proporcionaron campos válidos para actualizar.',
-      });
-    }
-
-    // Construir consulta SQL
-    const updateQuery = `
-      UPDATE producto 
-      SET ${fieldsToUpdate.join(', ')}
-      WHERE id = $${queryIndex}
-      RETURNING *;
-    `;
-    values.push(id);
-
-    console.log('Consulta generada:', updateQuery);
-    console.log('Valores:', values);
-
-    // Ejecutar la consulta
-    const resultadoActualizacion = await pool.query(updateQuery, values);
-
-    // Emitir evento de actualización
-    io.emit('productoActualizado', resultadoActualizacion.rows[0]);
-
-    // Responder con el producto actualizado
-    res.status(200).json(resultadoActualizacion.rows[0]);
+    const result = await pool.query(updateQuery, values);
+    io.emit('productoActualizado', result.rows[0]);
+    res.status(200).json(result.rows[0]);
   } catch (error) {
     console.error('Error al actualizar el producto:', error);
     res.status(500).json({ message: 'Error del servidor al actualizar el producto.' });
   }
 });
+
 
 
 app.delete('/api/productos/:id', authenticateToken, async (req, res) => {
