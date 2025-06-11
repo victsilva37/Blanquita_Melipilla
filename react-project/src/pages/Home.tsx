@@ -14,11 +14,11 @@ export default function Home(){
             {/* Component: BANNER */}
             <Banner/>
 
-            {/* Component: MAIN-PRODUCTOS */}
-            <MainProductos/>
-
             {/* Component: INFO */}
             <Info/>
+
+            {/* Component: MAIN-PRODUCTOS */}
+            <MainProductos/>
 
         </>
         

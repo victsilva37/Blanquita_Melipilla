@@ -76,7 +76,7 @@ export default function MainProductos() {
                 />
                 
                 {/* h6: Nombre del producto */}
-                <h6 className="card-title">{producto.nombre_producto}</h6>
+                <h6 className="card-title">{decodeURIComponent(producto.nombre_producto)}</h6>
                 
                 {/* span: Precio unitario */}
                 <span>${Math.trunc(producto.precio_unitario)} c/u</span>

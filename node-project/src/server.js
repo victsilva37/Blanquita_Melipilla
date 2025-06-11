@@ -26,6 +26,12 @@ app.use(
 // Middleware JSON
 app.use(express.json({ limit: '10mb' }));
 
+app.use((req, res, next) => {
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  next();
+});
+
+
 // Ruta absoluta para la carpeta "uploads"
 const uploadsDir = path.join(__dirname, 'uploads');
 
