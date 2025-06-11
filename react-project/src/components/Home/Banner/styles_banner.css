@@ -1,14 +1,29 @@
 #banner-content{
     display: flex;
     justify-content: center;
-    margin-top: 125px;
+    margin-top: 75px;
+}
 
+.banner-text-overlay {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Karantina';
+    text-shadow: 2px 2px 4px rgba(7, 29, 221, 0.8);
+    padding: 10px;
+    background-color: rgba(21, 142, 212, 0.5); /* Fondo semitransparente */
+    border-radius: 10px;
 }
 
 .carousel-inner{
-    width: 80%;
+    width: 100%;
     max-height: 300px;
-    border-radius: 20px;
     box-shadow: 0 2px 5px black;
 }
 
@@ -17,6 +32,8 @@
     height: auto;
     object-fit: cover;
 }
+
+
 
 
 

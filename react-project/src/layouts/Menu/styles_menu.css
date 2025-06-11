@@ -1,5 +1,5 @@
 #menu-content {
-    background-color: #4f51c4;
+    background-color: #004AAD;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,8 +14,8 @@
 /*LOGO BLANQUITA*/
 
   #menu-content img{
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
   }
 
 
@@ -24,8 +24,9 @@
   nav{
     width: 80%;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
+    gap: 20px;
     list-style: none;
   }
 
@@ -47,19 +48,19 @@
     }
 
     nav #section-inicio a{
-      color: white;
+      color: rgba(255, 255, 255, 0.747);
       text-align: center;
       text-decoration: none;
       font-family: 'Karantina';
-      font-size: 25px;
+      font-size: 28px;
     }
 
     nav #section-inicio a:hover{
-      color: rgb(199, 207, 203)
+      color: rgb(48, 189, 182);
     }
 
     nav #section-inicio a:active{
-      color: rgb(29, 74, 199)
+      color: rgb(48, 189, 182)
     }
 
   /*OPCIÓN CATÁLOGO*/
@@ -80,15 +81,15 @@
       }
 
       nav #section-catalogo a{
-        color: white;
+        color: rgba(255, 255, 255, 0.747);;
         text-align: center;
         text-decoration: none;
         font-family: 'Karantina';
-        font-size: 25px;
+        font-size: 28px;
       }
 
       nav #section-catalogo a:hover{
-        color: rgb(199, 207, 203)
+        color: rgb(48, 189, 182)
       }
 
       nav #section-catalogo a:active{

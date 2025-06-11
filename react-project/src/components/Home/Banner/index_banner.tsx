@@ -6,19 +6,29 @@ export default function Banner(){
     return(
         <>
             <div id="banner-content" className="carousel slide" data-bs-ride="carousel">
-                <div className="carousel-inner">
 
-                    {/* Imagen 1 */}
-                    <div className="carousel-item active">
-                        <img src={img1} alt="Producto" />
-                    </div>
+                    {/*TEXTO SUPERPUESTO*/}
 
-                    {/* Imagen 2 */}
-                    <div className="carousel-item">
-                        <img src={img2} alt="Producto" />
-                    </div>
-                    
-                </div>
+                        <div className="banner-text-overlay">
+                            Envases y troquelados Blanquita Melipilla
+                        </div>
+
+
+                    {/*CARRUSEL*/}
+
+                        <div className="carousel-inner">
+
+                            {/* Imagen 1 */}
+                            <div className="carousel-item active">
+                                <img src={img1} alt="Producto" />
+                            </div>
+
+                            {/* Imagen 2 */}
+                            <div className="carousel-item">
+                                <img src={img2} alt="Producto" />
+                            </div>
+                            
+                        </div>
             </div>
         </>
     )
