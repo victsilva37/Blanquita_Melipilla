@@ -3,7 +3,7 @@ import img1 from '../../assets/img/Menu/img1_logo_blanquita.png';
 // import img2 from '../../assets/img/Menu/img2_inicio.png';
 // import img3 from '../../assets/img/Menu/img3_catalogo.png';
 
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 
 export default function Menu() {
@@ -25,7 +25,8 @@ export default function Menu() {
 
                             <div id="section-inicio">
                                 {/* <img src={img2} alt="" /> */}
-                                <Link to="/">INICIO</Link>
+                                <a href="#inicio">INICIO</a>
+                                {/* <Link to="/">INICIO</Link> */}
                             </div>
 
 
@@ -33,7 +34,8 @@ export default function Menu() {
 
                             <div id="section-catalogo">
                                 {/* <img src={img3} alt="" /> */}
-                                <Link to="/catalogo">CATÁLOGO</Link>
+                                {/* <Link to="/catalogo">CATÁLOGO</Link> */}
+                                <a href="#catalogo">CATÁLOGO</a>
                             </div>
 
                     </nav>
