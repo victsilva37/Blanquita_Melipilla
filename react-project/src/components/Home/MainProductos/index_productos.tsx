@@ -20,9 +20,10 @@ export default function MainProductos() {
             {/* Cantidad por paquete */}
             <p>Paquetes de {producto.cantidad_por_paquete} unidades</p>
             {/* Precio unitario */}
-            <span>
+            {/* <span>
               ${Math.trunc(producto.precio_unitario * producto.cantidad_por_paquete)}
-            </span>
+            </span> */}
+            <button id="btnVerDetalle" className="btn btn-primary">VER DETALLE</button>
           </div>
         ))
       ) : (
