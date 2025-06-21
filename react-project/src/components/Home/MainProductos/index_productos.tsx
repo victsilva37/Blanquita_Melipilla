@@ -23,7 +23,7 @@ export default function MainProductos() {
             {/* <span>
               ${Math.trunc(producto.precio_unitario * producto.cantidad_por_paquete)}
             </span> */}
-            <button id="btnVerDetalle" className="btn btn-primary">VER DETALLE</button>
+            {/* <button id="btnVerDetalle" className="btn btn-primary">VER DETALLE</button> */}
           </div>
         ))
       ) : (
