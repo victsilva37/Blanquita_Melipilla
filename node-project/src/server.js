@@ -8,6 +8,8 @@ const socketIo = require('socket.io');
 require('dotenv').config(); // Carga variables de entorno desde un archivo .env
 const pool = require('./database'); // Conexión a la base de datos
 const authenticateToken = require('./token');
+require('./syncImages');
+
 
 const app = express();
 const server = http.createServer(app);
