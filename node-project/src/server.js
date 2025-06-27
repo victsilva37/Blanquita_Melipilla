@@ -9,6 +9,7 @@ require('dotenv').config(); // Carga variables de entorno desde un archivo .env
 const pool = require('./database'); // Conexión a la base de datos
 const authenticateToken = require('./token');
 require('./syncImages');
+require('./s3Uploader'); // Importa el módulo de carga a S3
 
 
 const app = express();
