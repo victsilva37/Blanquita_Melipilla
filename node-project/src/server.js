@@ -91,50 +91,38 @@ app.get('/api/productos', authenticateToken, async (req, res) => {
 });
 
 
-app.post('/api/productos', authenticateToken, async (req, res) => {
-  const {
-    nombre_producto,
-    precio_unitario,
-    precio_x_mayor,
-    img_producto,
-    cantidad_por_paquete = 1,
-    stock = 0,
-  } = req.body;
+const { uploadToS3 } = require("./s3Uploader");
+
+app.post("/api/productos", authenticateToken, async (req, res) => {
+  const { nombre_producto, precio_unitario, img_producto } = req.body;
 
   if (!nombre_producto || !precio_unitario || !img_producto) {
-    return res.status(400).json({ message: 'Faltan campos obligatorios.' });
+    return res.status(400).json({ message: "Faltan campos obligatorios." });
   }
 
   try {
-    const imgBuffer = Buffer.from(img_producto, 'base64');
-    const imagenNombre = `${Date.now()}.jpg`;
-    const imagePath = path.join(__dirname, 'uploads', imagenNombre);
+    const imgBuffer = Buffer.from(img_producto, "base64");
+    const fileName = `${Date.now()}-${nombre_producto}.jpg`;
 
-    await sharp(imgBuffer).resize(500).toFile(imagePath);
+    // Sube la imagen a S3
+    const uploadResult = await uploadToS3(imgBuffer, fileName);
 
     const query = `
-      INSERT INTO producto (nombre_producto, precio_unitario, precio_x_mayor, img_producto, cantidad_por_paquete, stock)
-      VALUES ($1, $2, $3, $4, $5, $6)
+      INSERT INTO producto (nombre_producto, precio_unitario, img_producto)
+      VALUES ($1, $2, $3)
       RETURNING *;
     `;
-    const values = [
-      nombre_producto,
-      parseFloat(precio_unitario),
-      parseFloat(precio_x_mayor || 0),
-      imagenNombre,
-      parseInt(cantidad_por_paquete),
-      parseInt(stock),
-    ];
+    const values = [nombre_producto, parseFloat(precio_unitario), uploadResult.Location];
 
     const result = await pool.query(query, values);
-    io.emit('nuevoProducto', result.rows[0]);
 
     res.status(201).json(result.rows[0]);
   } catch (error) {
-    console.error('Error al guardar en la base de datos:', error);
-    res.status(500).json({ message: 'Error del servidor al guardar el producto.' });
+    console.error("Error al subir la imagen:", error);
+    res.status(500).json({ message: "Error del servidor al subir la imagen." });
   }
 });
+
 
 
 app.patch('/api/productos/:id', authenticateToken, async (req, res) => {
