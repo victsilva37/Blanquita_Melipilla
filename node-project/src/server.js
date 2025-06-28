@@ -8,7 +8,6 @@ const socketIo = require('socket.io');
 require('dotenv').config(); // Carga variables de entorno desde un archivo .env
 const pool = require('./database'); // Conexión a la base de datos
 const authenticateToken = require('./token');
-require('./syncImages');
 require('./s3Uploader'); // Importa el módulo de carga a S3
 
 
@@ -35,17 +34,19 @@ app.use((req, res, next) => {
 });
 
 
-// Ruta absoluta para la carpeta "uploads"
 const uploadsDir = path.join(__dirname, 'uploads');
-
-// Crear la carpeta 'uploads' si no existe
 if (!fs.existsSync(uploadsDir)) {
   console.log('La carpeta "uploads" no existe. Creándola...');
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
-
-// Servir imágenes desde la carpeta "uploads"
 app.use('/uploads', express.static(uploadsDir));
+fs.watch(uploadsDir, (eventType, filename) => {
+  if (filename) {
+    console.log(`Cambio detectado en 'uploads': ${filename} (${eventType})`);
+    io.emit('uploadsUpdated', { filename, eventType });
+  }
+});
+
 
 // Monitoreo de cambios en la carpeta 'uploads'
 fs.watch(uploadsDir, (eventType, filename) => {
