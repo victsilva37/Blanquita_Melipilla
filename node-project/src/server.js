@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const sharp = require('sharp'); // Para procesar imágenes
+const sharp = require('sharp'); // Para procesar imágenes (aunque no lo usas aquí)
 const http = require('http');
 const fs = require('fs'); // Para monitorear cambios en la carpeta 'uploads'
 const socketIo = require('socket.io');
@@ -10,13 +10,11 @@ const pool = require('./database'); // Conexión a la base de datos
 const authenticateToken = require('./token');
 require('./s3Uploader'); // Importa el módulo de carga a S3
 
-
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
 // Middleware CORS para permitir solicitudes desde cualquier origen
-// Middleware CORS
 app.use(
   cors({
     origin: '*',
@@ -33,22 +31,16 @@ app.use((req, res, next) => {
   next();
 });
 
-
+// Ruta absoluta para la carpeta "uploads"
 const uploadsDir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadsDir)) {
   console.log('La carpeta "uploads" no existe. Creándola...');
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
+// Servir imágenes locales solo si las necesitas
 app.use('/uploads', express.static(uploadsDir));
-fs.watch(uploadsDir, (eventType, filename) => {
-  if (filename) {
-    console.log(`Cambio detectado en 'uploads': ${filename} (${eventType})`);
-    io.emit('uploadsUpdated', { filename, eventType });
-  }
-});
 
-
-// Monitoreo de cambios en la carpeta 'uploads'
+// Monitoreo de cambios en la carpeta 'uploads' (solo una vez)
 fs.watch(uploadsDir, (eventType, filename) => {
   if (filename) {
     console.log(`Cambio detectado en 'uploads': ${filename} (${eventType})`);
@@ -65,7 +57,6 @@ io.on('connection', (socket) => {
   });
 });
 
-
 // Rutas protegidas y públicas
 app.get('/api/productos', authenticateToken, async (req, res) => {
   try {
@@ -76,9 +67,11 @@ app.get('/api/productos', authenticateToken, async (req, res) => {
       return res.status(404).json({ message: 'No hay productos disponibles.' });
     }
 
+    // Aquí NO concatenamos nada al campo img_producto porque ya es URL completa de S3
     const productos = result.rows.map((producto) => ({
       ...producto,
-      img_producto: `/uploads/${producto.img_producto}`,
+      // No concatenar "/uploads/" delante
+      img_producto: producto.img_producto,
       precio_total:
         producto.cantidad_por_paquete > 1
           ? producto.precio_unitario * producto.cantidad_por_paquete
@@ -92,18 +85,17 @@ app.get('/api/productos', authenticateToken, async (req, res) => {
   }
 });
 
+const { uploadToS3 } = require('./s3Uploader');
 
-const { uploadToS3 } = require("./s3Uploader");
-
-app.post("/api/productos", authenticateToken, async (req, res) => {
+app.post('/api/productos', authenticateToken, async (req, res) => {
   const { nombre_producto, precio_unitario, img_producto } = req.body;
 
   if (!nombre_producto || !precio_unitario || !img_producto) {
-    return res.status(400).json({ message: "Faltan campos obligatorios." });
+    return res.status(400).json({ message: 'Faltan campos obligatorios.' });
   }
 
   try {
-    const imgBuffer = Buffer.from(img_producto, "base64");
+    const imgBuffer = Buffer.from(img_producto, 'base64');
     const fileName = `${Date.now()}-${nombre_producto}.jpg`;
 
     // Sube la imagen a S3
@@ -114,18 +106,17 @@ app.post("/api/productos", authenticateToken, async (req, res) => {
       VALUES ($1, $2, $3)
       RETURNING *;
     `;
+    // Guardamos la URL completa que devuelve AWS S3
     const values = [nombre_producto, parseFloat(precio_unitario), uploadResult.Location];
 
     const result = await pool.query(query, values);
 
     res.status(201).json(result.rows[0]);
   } catch (error) {
-    console.error("Error al subir la imagen:", error);
-    res.status(500).json({ message: "Error del servidor al subir la imagen." });
+    console.error('Error al subir la imagen:', error);
+    res.status(500).json({ message: 'Error del servidor al subir la imagen.' });
   }
 });
-
-
 
 app.patch('/api/productos/:id', authenticateToken, async (req, res) => {
   const { id } = req.params;
@@ -183,22 +174,17 @@ app.patch('/api/productos/:id', authenticateToken, async (req, res) => {
   }
 });
 
-
-
 app.delete('/api/productos/:id', authenticateToken, async (req, res) => {
   const { id } = req.params;
 
   try {
-    // Verificar si el producto existe
     const productoExistente = await pool.query('SELECT * FROM producto WHERE id = $1;', [id]);
     if (productoExistente.rows.length === 0) {
       return res.status(404).json({ message: 'Producto no encontrado.' });
     }
 
-    // Eliminar el producto
     await pool.query('DELETE FROM producto WHERE id = $1;', [id]);
 
-    // Emitir evento para notificar la eliminación si usas sockets
     io.emit('productoEliminado', { id });
 
     res.status(200).json({ message: 'Producto eliminado correctamente.' });
@@ -208,12 +194,9 @@ app.delete('/api/productos/:id', authenticateToken, async (req, res) => {
   }
 });
 
-
-
 app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
 
-  // Simulación de autenticación: reemplaza esto con la lógica de tu base de datos
   if (username === process.env.USERNAME && password === process.env.PASSWORD) {
     const user = { username: 'admin' };
     const token = require('jsonwebtoken').sign(user, process.env.JWT_SECRET, {
