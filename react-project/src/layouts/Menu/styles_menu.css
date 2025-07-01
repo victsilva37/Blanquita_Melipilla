@@ -11,6 +11,15 @@
     box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Ajustes automáticos para pantallas pequeñas */
+  @media (max-width: 768px) {
+    #menu-content {
+        flex-direction: row; /* Cambia a formato vertical */
+        padding: 1px;
+    }
+
+  }
+
 /*LOGO BLANQUITA*/
 
   #menu-content img{
@@ -97,22 +106,16 @@
       }
 
 
-/*RESPONSIVO*/
+    /* Ajustes automáticos para pantallas pequeñas */
+    @media (max-width: 768px) {
 
-  /* Ajustes automáticos para pantallas pequeñas */
-  @media (max-width: 768px) {
-    #menu-content {
-        flex-direction: row; /* Cambia a formato vertical */
-        padding: 10px;
-    }
+      nav {
+          flex-direction: row; /* Menú en columna */
+          gap: 15px;
+      }
 
-    nav {
-        flex-direction: row; /* Menú en columna */
-        gap: 15px;
+      nav #buscador {
+          width: 100%; /* Barra de búsqueda ocupa todo el ancho */
+      }
     }
-
-    nav #buscador {
-        width: 100%; /* Barra de búsqueda ocupa todo el ancho */
-    }
-  }
   
