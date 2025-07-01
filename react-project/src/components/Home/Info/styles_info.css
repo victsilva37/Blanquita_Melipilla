@@ -11,12 +11,6 @@
     flex-wrap: wrap;
 }
 
-@media (max-width: 768px) {
-    #card-info {
-        flex-direction: column;
-        align-items: center;
-    }
-}
 
 
 /* INFO 1 */
@@ -43,7 +37,7 @@
         font-weight: 100;
     }
 
-    
+
 /*INFO 2*/
 
     /*sin contenido*/
