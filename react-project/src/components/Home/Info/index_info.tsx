@@ -7,24 +7,47 @@ export default function Info(){
     return(
         <>
          <div id='card-info'>
-            <div className="card-body">
-                <img src={img1} alt="" />
-                <p>
-                    <strong>
-                    Ofrecemos envases y troquelados prácticos y resistentes,<br />
-                    ideales para productos como papas fritas y pizzas individuales.
-                    </strong>
-                </p>
-            </div>
-            <div className="card-body">
-                <img src={img2} alt="" />
-                <p>
-                    <strong>
-                    Nuestros productos son ideales para almacenar <br />
-                     y presentar alimentos de manera sencilla.
-                    </strong>
-                </p>
-            </div>
+
+            {/* INFO 1 */}
+
+                <div className="card-body">
+
+                    {/* LOGO */}
+
+                        <img src={img1} alt="" />
+
+
+                    {/* TITULO */}
+
+                        <p>
+                            <strong>
+                            Ofrecemos envases y troquelados prácticos y resistentes,<br />
+                            ideales para productos como papas fritas y pizzas individuales.
+                            </strong>
+                        </p>
+
+                </div>
+
+
+            {/* INFO 2 */}
+
+                <div className="card-body">
+
+                    {/* LOGO */}
+
+                        <img src={img2} alt="" />
+
+
+                    {/* TITULO */}
+                    
+                        <p>
+                            <strong>
+                            Nuestros productos son ideales para almacenar <br />
+                            y presentar alimentos de manera sencilla.
+                            </strong>
+                        </p>
+                </div>
+
         </div>
         </>
        
