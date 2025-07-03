@@ -1,33 +1,53 @@
 import "./styles_productos.css";
 import { useProductos } from "./func_productos";
+import ModalProducto from "./modalProducto/index_modal_pro";
+
 
 export default function MainProductos() {
-  const { productosMostrados } = useProductos();
+  const { productosMostrados, abrirModal, cerrarModal, productoSeleccionado } = useProductos();
 
-  console.log("Productos:", productosMostrados);
 
   return (
     <div id="productos-content">
       {productosMostrados.length > 0 ? (
-        productosMostrados.map((producto, index) => (
-          <div
-            key={producto.id_producto ?? index} // fallback en caso de no tener id_producto
-            className="card"
-            id="card-producto"
-          >
-            <img
-              src={producto.img_producto}
-              className="card-img-top"
-              alt={producto.nombre_producto}
-            />
-            <h4 className="card-title">{producto.nombre_producto}</h4>
-            <p>Paquetes de {producto.cantidad_por_paquete} unidades</p>
+        productosMostrados.map((producto) => (
+          // Renderizar cada producto
+          // Usar key para identificar cada elemento de la lista
+          <div key={producto.id_producto} className="card" id="card-producto">
+
+            {/* IMAGEN DEL PRODUCTO */}
+
+              <img
+                src={producto.img_producto}
+                className="card-img-top"
+                alt={producto.nombre_producto}
+              />
+
+
+            {/* NOMBRE DEL PRODUCTO */}
+
+              <h4 className="card-title">{producto.nombre_producto}</h4>
+
+
+            {/* BOTÓN VER DETALLE */}
+
+              <button 
+                className="btn btn-primary" 
+                onClick={() => abrirModal(producto)}>VER DETALLE
+              </button>
+
           </div>
         ))
       ) : (
         <p>Cargando productos...</p>
       )}
+
+      {/* Component: MODAL-PRODUCTO */}
+
+        {productoSeleccionado && (
+          <ModalProducto producto={productoSeleccionado} cerrarModal={cerrarModal} />
+        )}
+
     </div>
   );
 }
-

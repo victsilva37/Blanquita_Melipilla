@@ -13,55 +13,68 @@
     border-radius: 8px;
     margin-bottom: 20px;
 }
-  
-#productos-content #card-producto{
-    background-color: rgb(251, 252, 253);
-    width: 200px;
-    max-height: 400px;
-    box-shadow: 1px 2px 4px 2px #cdcdf3;
-    padding: 10px;
-}
+
+/* card-producto: Contenedor de cada producto */
+    #productos-content #card-producto{
+        background-color: rgb(251, 252, 253);
+        width: 200px;
+        max-height: 400px;
+        box-shadow: 1px 2px 4px 2px #cdcdf3;
+        padding: 10px;
+    }
 
 
-/* img: Imagen  del producto en el servidor */
-#productos-content #card-producto img{
-    width: 100%;
-    height: 200px;
-    align-self: center;
-}
+/*IMAGEN DEL PRODUCTO*/
 
-/* h6: Nombre del producto */
-#productos-content h4 {
-    font-family: "Karantina", system-ui;
-    white-space: nowrap;
-    font-size: 20px;
-    text-align: center;
-    overflow: hidden; /* Oculta el desbordamiento */
-    text-overflow: ellipsis; /* Agrega puntos suspensivos */
-}
+    #productos-content #card-producto img{
+        width: 100%;
+        height: 200px;
+        align-self: center;
+    }
 
 
-#productos-content p{
-    font-family: "Karantina", system-ui;
-    font-weight: 100;
-    text-align: center;
-    white-space: nowrap;
-    margin: 0;
-    padding: 0;
-}
+/* NOMBRE DEL PRODUCTO */
 
-/* span: Precio unitario */
-#productos-content span{
-    font-family: "Karantina";
-    font-size: 30px;
-    font-weight: 300;
-    font-style: normal;
-    text-align: center;
-}
+    #productos-content h4 {
+        font-family: "Karantina", system-ui;
+        white-space: nowrap;
+        font-size: 20px;
+        text-align: center;
+        overflow: hidden; /* Oculta el desbordamiento */
+        text-overflow: ellipsis; /* Agrega puntos suspensivos */
+    }
 
-#productos-content #btnVerDetalle{
-    font-family: "Karantina";
-    margin-top: 10px;
-}
+    
+/* BOTON VER DETALLE */
+
+    #productos-content .btn {
+        width: 100%;
+        height: 40px;
+        font-family: "Karantina", system-ui;
+        font-size: 16px;
+        background-color: #0f53ac;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+
+/*Component: MODAL-PRODUCTO*/
+
+    #modal-producto {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1000;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
 
 
