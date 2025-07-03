@@ -54,19 +54,21 @@ export default function ModalProducto({ producto, cerrarModal }: ModalProps) {
               {/* Nombre del producto */}
               <h2>{producto.nombre_producto}</h2>
 
+              {/* Cantidad del producto */}
+              <div className="cantidad-container">
 
-                {/* Cantidad del producto */}
-                <div className="cantidad-container">
+                  <label>Cantidad:</label>
 
-                    <label>Cantidad:</label>
-
-                    {/* Botón prev */}
+                  {/* Botón prev */}
                     <button
+                    className={cantidad <= 1 ? "disabled-button-prev" : ""}
                     onClick={() => setCantidad((prev) => Math.max(1, prev - 1))}
-                    >-</button>
+                    disabled={cantidad <= 1}
+                    >-
+                    </button>
 
-                    {/* Input de cantidad */}
-                    <input
+                  {/* Input de cantidad */}
+                  <input
                     id="cantidad"
                     type="number"
                     min={1}
@@ -76,25 +78,24 @@ export default function ModalProducto({ producto, cerrarModal }: ModalProps) {
                       const value = Number(e.target.value);
                       setCantidad(value >= 1 ? value : 1);
                     }}
-                    />
+                  />
 
-                    {/* Botón next */}
-                    <button
-                    onClick={() => setCantidad((prev) => prev + 1)}
-                    >+</button>
+                  {/* Botón next */}
+                  <button
+                    onClick={() => setCantidad((prev) => prev + 1)}>+
+                  </button>
 
-                </div>
+              </div>
+
+              {/* Precio total */}
+              <h3 className="total">
+                Precio total: <strong>${cantidad >= 500 ? precioDesc : precioNeto}</strong>
+              </h3>
+
             </div>
           </div>
+    
        
-
-        <p>Precio unitario: ${producto.precio_unitario}</p>
-
-        
-
-        <p className="total">
-          Precio total: <strong>${cantidad >= 500 ? precioDesc : precioNeto}</strong>
-        </p>
       </div>
     </div>
   );

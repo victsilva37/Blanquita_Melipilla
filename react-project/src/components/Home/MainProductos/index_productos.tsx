@@ -15,6 +15,11 @@ export default function MainProductos() {
           // Usar key para identificar cada elemento de la lista
           <div key={producto.id_producto} className="card" id="card-producto">
 
+            {/* NOMBRE DEL PRODUCTO */}
+
+              <h4 className="card-title">{producto.nombre_producto}</h4>
+              
+
             {/* IMAGEN DEL PRODUCTO */}
 
               <img
@@ -22,12 +27,6 @@ export default function MainProductos() {
                 className="card-img-top"
                 alt={producto.nombre_producto}
               />
-
-
-            {/* NOMBRE DEL PRODUCTO */}
-
-              <h4 className="card-title">{producto.nombre_producto}</h4>
-
 
             {/* BOTÓN VER DETALLE */}
 

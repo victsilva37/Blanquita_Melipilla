@@ -16,39 +16,92 @@
   padding: 20px;
   border-radius: 5px;
   width: 90%;
-  max-width: 800px;
+  max-width: 600px;
 }
 
 /*BOTÓN DE CIERRE*/
 
   #modal-producto .modal-content .close-modal-btn {
     position: absolute;
-      top: 10px;
-      right: 20px;
-      background-color: transparent;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-      color: #333;
+    top: 10px;
+    right: 20px;
+    background-color: transparent;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: #be0c0c;
   }
 
+
+/*INFORMACIÓN DEL PRODUCTO*/
 
   #modal-producto .modal-content #info-producto{
     display: flex;
     justify-content: space-around;
+    margin-top: 20px;
   }
 
+  /*Imagen del producto*/
   #modal-producto .modal-content img{
-    max-width: 400px;
-    height: 400px;
+    max-width: 300px;
+    max-height: 300px;
   }
 
+  .cantidad-container {
+    margin-top: 10px;
+  }
+
+  /*Nombre del producto*/
   #modal-producto .modal-content #info-producto h2 {
     margin: 0;
     font-size: 34px;
-    font-family: 'Karantina', sans-serif;
     color: #333;
     text-align: center;
+  }
+
+  /*Cantidad del producto*/
+  #modal-producto .modal-content #info-producto label {
+    font-size: 20px;
+    color: #333;
+    margin-right: 10px;
+  }
+
+  #modal-producto .modal-content #info-producto button {
+      background-color: #300ef3;
+      width: 25px;
+      border-radius: 50%;
+      border: none;
+      color: white;
+      font-size: 18px;
+  }
+
+  #modal-producto .modal-content #info-producto .disabled-button-prev {
+    background-color: #9b9595;
+    cursor: not-allowed;
+  }
+
+
+  /*Input de cantidad del producto*/
+  #modal-producto .modal-content #info-producto input {
+      width: 50px;
+      font-size: 24px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      text-align: center;
+      font-weight: 200;
+  }
+
+
+/*PRECIO TOTAL*/
+
+  #modal-producto .modal-content .total {
+    font-size: 24px;
+    text-align: end;
+    margin-top: 20px;
+  }
+
+  #modal-producto .modal-content .total strong {
+    font-size: 35px;
   }
 
   
