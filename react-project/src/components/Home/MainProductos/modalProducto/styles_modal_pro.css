@@ -7,17 +7,20 @@
   z-index: 1000;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
 
 #modal-producto .modal-content {
   background-color: #fff;
+  flex-wrap: wrap;
   padding: 20px;
   border-radius: 5px;
   width: 90%;
   max-width: 600px;
 }
+
 
 /*BOTÓN DE CIERRE*/
 
@@ -27,7 +30,7 @@
     right: 20px;
     background-color: transparent;
     border: none;
-    font-size: 30px;
+    font-size: 34px;
     cursor: pointer;
     color: #be0c0c;
   }
@@ -41,12 +44,28 @@
     margin-top: 20px;
   }
 
+  @media (max-width: 1200px) {
+    #modal-producto .modal-content #info-producto {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
   /*Imagen del producto*/
   #modal-producto .modal-content img{
     max-width: 300px;
     max-height: 300px;
   }
 
+  @media (max-width: 1200px) {
+    #modal-producto .modal-content img {
+      max-width: 200px;
+      max-height: 200px;
+      margin-bottom: 10px;
+    }
+  }
+
+  /*Contenedor de la cantidad del producto*/
   .cantidad-container {
     margin-top: 10px;
   }
@@ -59,6 +78,12 @@
     text-align: center;
   }
 
+  @media (max-width: 1200px) {
+    #modal-producto .modal-content #info-producto h2 {
+      font-size: 24px;
+    }
+  }
+
   /*Cantidad del producto*/
   #modal-producto .modal-content #info-producto label {
     font-size: 20px;
@@ -66,6 +91,12 @@
     margin-right: 10px;
   }
 
+  @media (max-width: 1200px) {
+    #modal-producto .modal-content #info-producto label {
+      font-size: 18px;
+    }
+  }
+  
   #modal-producto .modal-content #info-producto button {
       background-color: #300ef3;
       width: 25px;
@@ -75,9 +106,20 @@
       font-size: 18px;
   }
 
+  #modal-producto .modal-content #info-producto button:hover {
+    background-color: #1a0bbf;
+  }
+  
   #modal-producto .modal-content #info-producto .disabled-button-prev {
     background-color: #9b9595;
     cursor: not-allowed;
+  }
+
+  @media (max-width: 1200px) {
+    #modal-producto .modal-content #info-producto button {
+      width: 30px;
+      font-size: 18px;
+    }
   }
 
 
@@ -91,6 +133,13 @@
       font-weight: 200;
   }
 
+  @media (max-width: 1200px) {
+    #modal-producto .modal-content #info-producto input {
+      width: 40px;
+      font-size: 18px;
+    }
+  }
+
 
 /*PRECIO TOTAL*/
 
@@ -102,6 +151,17 @@
 
   #modal-producto .modal-content .total strong {
     font-size: 35px;
+  }
+
+  @media (max-width: 1200px) {
+    #modal-producto .modal-content .total {
+      font-size: 20px;
+      margin-top: 10px;
+    }
+
+    #modal-producto .modal-content .total strong {
+      font-size: 28px;
+    }
   }
 
   
