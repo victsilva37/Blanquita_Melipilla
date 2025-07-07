@@ -97,9 +97,23 @@ npm install
 ```bash
 npm run dev
 ```
-O para código JavaScript:
 
 ### Seguridad y autenticación
 
-La aplicación implementa un sistema de autenticación mediante JWT (JSON Web Tokens) para proteger el acceso a los recursos del backend.
+La aplicación implementa un sistema de autenticación mediante JWT (JSON Web Tokens) para proteger el acceso a los recursos del backend. La mayoría de las rutas están protegidas con middleware que verifica la validez del token JWT enviado en el header Authorization.
+
+Los tokens tienen una duración de 7 días (168h) por motivos de seguridad.
+
+El flujo de autenticación consiste en lo siguiente: 
+
+* Se realiza a través de una petición POST al endpoint /api/login.
+
+* Se validan las credenciales contra variables de entorno (USERNAME y PASSWORD).
+
+* Si las credenciales son válidas, se genera y retorna un JWT firmado.
+
+Por seguridad, el token no se almacena en el frontend permanentemente y se renueva manualmente cuando expira utilizando Postman.
+Además es almacenado como variable de entorno dentro del proyecto React.
+
+Esta estructura permite mantener el backend protegido, mientras que el frontend puede consumir los datos de forma controlada y segura.
 
