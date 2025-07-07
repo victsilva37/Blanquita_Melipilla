@@ -30,10 +30,13 @@ export default function MainProductos() {
 
             {/* BOTÓN VER DETALLE */}
 
-              <button 
-                className="btn btn-primary" 
-                onClick={() => abrirModal(producto)}>VER DETALLE
-              </button>
+                <button
+                disabled={producto.precio_unitario == 0}
+                className="btn btn-primary"
+                onClick={() => abrirModal(producto)}
+                >
+                VER DETALLE
+                </button>
 
           </div>
         ))
