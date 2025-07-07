@@ -55,7 +55,7 @@ Para mantener un código modular y ordenado, se utiliza una nomenclatura especí
 
 * **index_:** Contiene el componente principal que retorna el TSX. Es el archivo donde está el return que define la estructura visual y la composición de ese componente.
 
-* **styles_:** Define los estilos del componente mediante StyleSheet.create(). Centraliza toda la definición visual, permitiendo separar la lógica y el render del estilo.
+* **styles_:** Define los estilos del componente. Centraliza toda la definición visual, permitiendo separar la lógica y el render del estilo.
 
 * **func_:** Contiene la lógica relacionada con ese componente. Aquí se colocan funciones auxiliares, manejo de estados, cálculos o cualquier lógica que no sea directamente la UI o el estilo.
 
