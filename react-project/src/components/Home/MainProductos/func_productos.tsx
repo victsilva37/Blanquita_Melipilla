@@ -4,60 +4,64 @@ import io from "socket.io-client";
 import { Producto } from "../../../interfaces/Producto";
 
 const API_TOKEN = import.meta.env.VITE_API_TOKEN;
-const FRONT_URL = import.meta.env.FRONTEND_URL;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export function useProductos() {
-    
   const [productos, setProductos] = useState<Producto[]>([]);
   const [productoSeleccionado, setProductoSeleccionado] = useState<Producto | null>(null);
   const [paginaActual] = useState(1);
   const productosPorPagina = 30;
 
-  // NOMBRE DEL PRODUCTO
+  useEffect(() => {
+    // Socket solo si es compatible (Render no siempre lo es)
+    const socket = io(BACKEND_URL, {
+      transports: ["websocket", "polling"],
+    });
 
-    useEffect(() => {
-      // Conectar a WebSocket para recibir nuevos productos
-      const socket = io(FRONT_URL);
+    socket.on("nuevoProducto", (nuevoProducto: Producto) => {
+      setProductos((prevProductos) => [...prevProductos, nuevoProducto]);
+    });
 
-      // Escuchar el evento 'nuevoProducto' y agregar el nuevo producto al estado
-      socket.on("nuevoProducto", (nuevoProducto: Producto) => {
-        setProductos((prevProductos) => [...prevProductos, nuevoProducto]);
-      });
-      
-      // Obtener los productos iniciales desde el servidor
+    // Función para obtener productos desde la API
+    const fetchProductos = () => {
       axios
-        .get("https://backend-node-wfhw.onrender.com/api/productos", {
+        .get(`${BACKEND_URL}/api/productos`, {
           headers: { Authorization: `Bearer ${API_TOKEN}` },
         })
         .then((response) => {
-          setProductos(response.data); // Ahora TypeScript no dará errores
+          setProductos(response.data);
         })
         .catch((error) => {
           console.error("Error al obtener productos:", error);
         });
-
-      // Limpiar la conexión del WebSocket cuando el componente se desmonte
-      return () => {
-        socket.disconnect();
-      };
-    }, []);
-
-    const productosMostrados = productos.slice(
-      (paginaActual - 1) * productosPorPagina,
-      paginaActual * productosPorPagina
-    );
-
-
-  //BOTON VER DETALLE
- 
-     const abrirModal = (producto: Producto) => {
-      setProductoSeleccionado(producto);
     };
 
-    const cerrarModal = () => {
-      setProductoSeleccionado(null);
-    };
+    // Llamada inicial
+    fetchProductos();
 
-    
-  return { productosMostrados, abrirModal, cerrarModal, productoSeleccionado};
+    // Polling cada 5 segundos
+    const intervalId = setInterval(fetchProductos, 5000);
+
+    return () => {
+      clearInterval(intervalId);
+      socket.disconnect();
+    };
+  }, []);
+
+  // Calcular productos por página
+  const productosMostrados = productos.slice(
+    (paginaActual - 1) * productosPorPagina,
+    paginaActual * productosPorPagina
+  );
+
+  // Modal handlers
+  const abrirModal = (producto: Producto) => {
+    setProductoSeleccionado(producto);
+  };
+
+  const cerrarModal = () => {
+    setProductoSeleccionado(null);
+  };
+
+  return { productosMostrados, abrirModal, cerrarModal, productoSeleccionado };
 }
