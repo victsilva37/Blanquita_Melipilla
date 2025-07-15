@@ -1,5 +1,19 @@
-footer{
-    background-color: #300ef3;
-    font-family: 'Karantina';
-    
+
+#root, .main-container { /* Ajusta el selector según tu estructura */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    background-color: #EBF7F9;
+    border: 2px solid #196685;
+    margin-top: auto;
+}
+
+footer p {
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    color: #196685;
 }

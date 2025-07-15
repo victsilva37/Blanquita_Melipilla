@@ -23,20 +23,24 @@ export default function Menu() {
 
                         {/* OPCIÓN INICIO */}
 
-                            <div id="section-inicio">
+                            {/* <div id="section-inicio"> */}
                                 {/* <img src={img2} alt="" /> */}
-                                <a href="#inicio">INICIO</a>
+                                {/* <a href="#inicio">INICIO</a> */}
                                 {/* <Link to="/">INICIO</Link> */}
+                            {/* </div> */}
+
+                            <div id="search-bar">
+                                <input type="text" placeholder="Buscar..." />
                             </div>
 
 
                         {/* OPCIÓN CATÁLOGO */}
 
-                            <div id="section-catalogo">
+                            {/* <div id="section-catalogo"> */}
                                 {/* <img src={img3} alt="" /> */}
                                 {/* <Link to="/catalogo">CATÁLOGO</Link> */}
-                                <a href="#catalogo">CATÁLOGO</a>
-                            </div>
+                                {/* <a href="#catalogo">CATÁLOGO</a>
+                            </div> */}
 
                     </nav>
             </div>

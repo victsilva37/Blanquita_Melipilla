@@ -17,7 +17,7 @@ export default function Home(){
                 <Banner/>
 
                 {/* Component: INFO */}
-                <Info/>
+                {/* <Info/> */}
             </section>
                 
 
