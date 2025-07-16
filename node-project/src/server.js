@@ -17,11 +17,13 @@ const io = socketIo(server);
 // Middleware CORS para permitir solicitudes desde cualquier origen
 app.use(
   cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
-    allowedHeaders: ['Authorization', 'Content-Type'],
+    origin: "https://blanquita-melipilla-4.onrender.com",
+    methods: ["GET", "POST", "PATCH", "DELETE"],
+    allowedHeaders: ["Authorization", "Content-Type"],
+    credentials: true,
   })
 );
+
 
 // Middleware JSON
 app.use(express.json({ limit: '10mb' }));
