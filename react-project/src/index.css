@@ -1,4 +1,4 @@
-Asegurar que el root y sus contenedores principales ocupen toda la altura
+/*Asegurar que el root y sus contenedores principales ocupen toda la altura*/
 html, body, #root {
     margin: 0;    /* Eliminar márgenes */
     padding: 0;   /* Eliminar relleno */

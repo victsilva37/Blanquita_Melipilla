@@ -199,9 +199,7 @@ app.post('/api/login', async (req, res) => {
 
   if (username === process.env.USERNAME && password === process.env.PASSWORD) {
     const user = { username: 'admin' };
-    const token = require('jsonwebtoken').sign(user, process.env.JWT_SECRET, {
-      expiresIn: '168h',
-    });
+    const token = require('jsonwebtoken').sign(user, process.env.JWT_SECRET);
     return res.status(200).json({ token });
   }
 
