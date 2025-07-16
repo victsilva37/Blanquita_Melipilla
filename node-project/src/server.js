@@ -12,26 +12,16 @@ require('./s3Uploader'); // Importa el módulo de carga a S3
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server, {
-  cors: {
-    origin: "https://blanquita-melipilla-4.onrender.com",
-    methods: ["GET", "POST", "PATCH", "DELETE"],
-    allowedHeaders: ["Authorization", "Content-Type"],
-    credentials: true
-  }
-});
-
+const io = socketIo(server);
 
 // Middleware CORS para permitir solicitudes desde cualquier origen
 app.use(
   cors({
-    origin: "https://blanquita-melipilla-4.onrender.com",
-    methods: ["GET", "POST", "PATCH", "DELETE"],
-    allowedHeaders: ["Authorization", "Content-Type"],
-    credentials: true,
+    origin: '*',
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Authorization', 'Content-Type'],
   })
 );
-
 
 // Middleware JSON
 app.use(express.json({ limit: '10mb' }));
@@ -209,7 +199,9 @@ app.post('/api/login', async (req, res) => {
 
   if (username === process.env.USERNAME && password === process.env.PASSWORD) {
     const user = { username: 'admin' };
-    const token = require('jsonwebtoken').sign(user, process.env.JWT_SECRET);
+    const token = require('jsonwebtoken').sign(user, process.env.JWT_SECRET, {
+      expiresIn: '168h',
+    });
     return res.status(200).json({ token });
   }
 
