@@ -12,7 +12,15 @@ require('./s3Uploader'); // Importa el módulo de carga a S3
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = socketIo(server, {
+  cors: {
+    origin: "https://blanquita-melipilla-4.onrender.com",
+    methods: ["GET", "POST", "PATCH", "DELETE"],
+    allowedHeaders: ["Authorization", "Content-Type"],
+    credentials: true
+  }
+});
+
 
 // Middleware CORS para permitir solicitudes desde cualquier origen
 app.use(
