@@ -15,7 +15,7 @@ export function useProductos() {
   useEffect(() => {
     // Socket solo si es compatible (Render no siempre lo es)
     const socket = io(BACKEND_URL, {
-      transports: ["polling"],
+      transports: ["websocket", "polling"],
     });
 
     socket.on("nuevoProducto", (nuevoProducto: Producto) => {

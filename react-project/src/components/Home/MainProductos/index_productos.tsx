@@ -8,48 +8,56 @@ export default function MainProductos() {
 
 
   return (
-    <div id="productos-content">
-      {productosMostrados.length > 0 ? (
-        productosMostrados.map((producto) => (
-          // Renderizar cada producto
-          // Usar key para identificar cada elemento de la lista
-          <div key={producto.id_producto} className="card" id="card-producto">
 
-            {/* NOMBRE DEL PRODUCTO */}
+    <div id="productos-container" className="container">
 
-              <h4 className="card-title">{producto.nombre_producto}</h4>
-              
+        <h1>¡Descubre las últimas tendencias!</h1>
 
-            {/* IMAGEN DEL PRODUCTO */}
+        <div id="productos-content">
 
-              <img
-                src={producto.img_producto}
-                className="card-img-top"
-                alt={producto.nombre_producto}
-              />
+          {productosMostrados.length > 0 ? (
+            productosMostrados.slice(-4).map((producto) => (
+              // Renderizar cada producto
+              // Usar key para identificar cada elemento de la lista
+              <div key={producto.id_producto} className="card" id="card-producto">
 
-            {/* BOTÓN VER DETALLE */}
+                {/* NOMBRE DEL PRODUCTO */}
 
-                <button
-                disabled={producto.precio_unitario == 0}
-                className="btn btn-primary"
-                onClick={() => abrirModal(producto)}
-                >
-                VER DETALLE
-                </button>
+                  <h4 className="card-title">{producto.nombre_producto}</h4>
+                  
 
-          </div>
-        ))
-      ) : (
-        <p>Cargando productos...</p>
-      )}
+                {/* IMAGEN DEL PRODUCTO */}
 
-      {/* Component: MODAL-PRODUCTO */}
+                  <img
+                    src={producto.img_producto}
+                    className="card-img-top"
+                    alt={producto.nombre_producto}
+                  />
 
-        {productoSeleccionado && (
-          <ModalProducto producto={productoSeleccionado} cerrarModal={cerrarModal} />
-        )}
+                {/* BOTÓN VER DETALLE */}
 
+                    <button
+                    disabled={producto.precio_unitario == 0}
+                    className="btn btn-primary"
+                    onClick={() => abrirModal(producto)}
+                    >
+                    VER DETALLE
+                    </button>
+
+              </div>
+            ))
+          ) : (
+            <p>Cargando productos...</p>
+          )}
+
+          {/* Component: MODAL-PRODUCTO */}
+
+            {productoSeleccionado && (
+              <ModalProducto producto={productoSeleccionado} cerrarModal={cerrarModal} />
+            )}
+
+        </div>
     </div>
+    
   );
 }

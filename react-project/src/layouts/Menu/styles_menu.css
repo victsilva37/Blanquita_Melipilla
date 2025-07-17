@@ -1,5 +1,5 @@
 #menu-content {
-    background-color: #EBF7F9;
+    background-color: #216ccf;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -8,7 +8,6 @@
     width: 100%; /* Ocupa todo el ancho */
     z-index: 1000; /* Por encima de otros elementos */
     box-sizing: border-box; /* Considera el padding en el ancho total */
-    border: 2px solid black;
 }
 
 /* Ajustes automáticos para pantallas pequeñas */
@@ -40,58 +39,48 @@
     list-style: none;
   }
 
-  /*OPCIÓN INICIO*/
-
-    /* nav #section-inicio{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      gap: 5px;
-    }
-
-    nav #section-inicio img{
-      color: blue;
-      width: 30px;
-      height: 30px;
-      align-self: center;
-    }
-
-    nav #section-inicio a{
-      color: rgba(255, 255, 255, 0.747);
-      text-align: center;
-      text-decoration: none;
-      font-family: 'Karantina';
-      font-size: 28px;
-    }
-
-    nav #section-inicio a:hover{
-      color: rgb(48, 189, 182);
-    }
-
-    nav #section-inicio a:active{
-      color: rgb(48, 189, 182)
-    } */
-
-    /*OPCIÓN BUSCADOR*/
+  
+  /*OPCIÓN BUSCADOR*/
 
       nav #search-bar {
         display: flex;
         align-items: center;
+        position: relative;
+        gap: 0;
+        width: 250px; /* Ancho del buscador */
       }
 
       nav #search-bar input {
-        padding: 5px;
-        border-radius: 5px;
-        border: 1px solid #2c0b0b;
-        width: 200px;
-        font-size: 16px;
+        padding: 5px 10px;
+        border-radius: 5px 0 0 5px;
+        border: 1px solid #ccc;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.08);
+        width: 220px;
+        font-size: 20px;
+        font-weight: 300;
+        outline: none;
+        margin-right: 0;
       }
 
       nav #search-bar button {
-        padding: 5px 5px;
-        background-color: #196685; /* Color del botón */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 10px;
+        background-color: #0e4e68;
+        border: none;
+        border-radius: 5px 0 0 5px;
         cursor: pointer;
+        width: 50px;
+        height: 43px;
+        transition: background 0.2s;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      nav #search-bar button:active {
+        background-color: #216ccf;
       }
 
       nav #search-bar button img {

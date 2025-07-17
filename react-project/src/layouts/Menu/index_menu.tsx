@@ -1,7 +1,6 @@
 import './styles_menu.css';
 import img1 from '../../assets/img/Menu/img1_logo_blanquita.png';
-// import img2 from '../../assets/img/Menu/img2_inicio.png';
-// import img3 from '../../assets/img/Menu/img3_catalogo.png';
+import icono_buscar from '../../assets/img/Menu/icono_buscar.png';
 
 // import { Link } from 'react-router-dom';
 
@@ -21,26 +20,12 @@ export default function Menu() {
 
                     <nav>
 
-                        {/* OPCIÓN INICIO */}
-
-                            {/* <div id="section-inicio"> */}
-                                {/* <img src={img2} alt="" /> */}
-                                {/* <a href="#inicio">INICIO</a> */}
-                                {/* <Link to="/">INICIO</Link> */}
-                            {/* </div> */}
+                        {/*OPCIÓN BUSCADOR**/}
 
                             <div id="search-bar">
                                 <input type="text" placeholder="Buscar..." />
+                                <button><img src={icono_buscar} alt="" /></button>
                             </div>
-
-
-                        {/* OPCIÓN CATÁLOGO */}
-
-                            {/* <div id="section-catalogo"> */}
-                                {/* <img src={img3} alt="" /> */}
-                                {/* <Link to="/catalogo">CATÁLOGO</Link> */}
-                                {/* <a href="#catalogo">CATÁLOGO</a>
-                            </div> */}
 
                     </nav>
             </div>
