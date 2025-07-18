@@ -1,33 +1,36 @@
-
+// pages/Home.tsx
+import { useState } from "react";
 import Banner from "../components/Home/Banner/index_banner";
-import Info from "../components/Home/Info/index_info";
 import MainProductos from "../components/Home/MainProductos/index_productos";
+import SearchProductos from "../components/Home/SearchProductos/index_sear_pro";
 import Footer from "../layouts/Footer/index_footer";
 import Menu from "../layouts/Menu/index_menu";
 
-export default function Home(){
+export default function Home() {
+  const [terminoBusqueda, setTerminoBusqueda] = useState("");
 
-    return(
-        <>
-            {/* Layout: MENU */}
-            <Menu/>
+  const cancelarBusqueda = () => setTerminoBusqueda("");
 
-            <section id="inicio">
-                {/* Component: BANNER */}
-                <Banner/>
+  return (
+    <>
+      <Menu
+        onBuscar={setTerminoBusqueda}
+        onCancelarBusqueda={cancelarBusqueda}
+      />
 
-                {/* Component: INFO */}
-                {/* <Info/> */}
-            </section>
-                
+      <section id="inicio">
+        <Banner />
+      </section>
 
-            <section id="catalogo">
-                {/* Component: MAIN-PRODUCTOS */}
-                <MainProductos/>
-            </section>
+      <section id="catalogo">
+        {terminoBusqueda ? (
+          <SearchProductos termino={terminoBusqueda} cancelarBusqueda={cancelarBusqueda} />
+        ) : (
+          <MainProductos />
+        )}
+      </section>
 
-            {/* Layout: FOOTER */}
-            <Footer/>
-        </>   
-    )
+      <Footer />
+    </>
+  );
 }
