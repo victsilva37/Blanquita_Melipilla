@@ -1,7 +1,9 @@
 import './styles_menu.css';
 import img1 from '../../assets/img/Menu/img1_logo_blanquita.png';
 import icono_buscar from '../../assets/img/Menu/icono_buscar.png';
+import img3 from '../../assets/img/Menu/img3_catalogo.png';
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface MenuProps {
   onBuscar: (termino: string) => void;
@@ -9,11 +11,15 @@ interface MenuProps {
 }
 
 export default function Menu({ onBuscar, onCancelarBusqueda  }: MenuProps) {
-  const [query, setQuery] = useState("");
+
+     const [query, setQuery] = useState("");
+  const navigate = useNavigate(); // Necesario para redirigir manualmente
 
   const handleBuscar = () => {
-    if (query.trim()) {
-      onBuscar(query.trim());
+    const termino = query.trim();
+    if (termino) {
+      onBuscar(termino);                // Actualiza estado en App
+      navigate(`/?buscar=${encodeURIComponent(termino)}`); // Redirige con query param
     }
   };
 
@@ -22,25 +28,25 @@ export default function Menu({ onBuscar, onCancelarBusqueda  }: MenuProps) {
   };
 
   const handleLogoClick = () => {
-    setQuery(""); // limpia el input
-    onCancelarBusqueda(); // cancela la búsqueda
+    setQuery(""); 
+    onCancelarBusqueda(); 
   };
 
   return (
     <div>
       <div id="menu-content">
 
-        {/* LOGO BLANQUITA */}
-        <img
-          src={img1}
-          alt="Logo Blanquita"
-          onClick={handleLogoClick}
-          style={{ cursor: 'pointer' }} // cursor tipo botón
-        />
+        {/* LOGO */}
+        <Link to="/">
+          <img
+            src={img1}
+            alt="Logo Blanquita"
+            onClick={handleLogoClick}
+            style={{ cursor: 'pointer' }}
+          />
+        </Link>
 
-        {/* NAVBAR */}
         <nav>
-          {/* BUSCADOR */}
           <div id="search-bar">
             <input
               type="text"
@@ -52,6 +58,13 @@ export default function Menu({ onBuscar, onCancelarBusqueda  }: MenuProps) {
             <button onClick={handleBuscar}>
               <img src={icono_buscar} alt="Buscar" />
             </button>
+          </div>
+
+          <div className="menu-option">
+            <Link to="/catalogo">
+              Catálogo
+              <img src={img3} alt="Catálogo" />
+            </Link>
           </div>
         </nav>
       </div>
