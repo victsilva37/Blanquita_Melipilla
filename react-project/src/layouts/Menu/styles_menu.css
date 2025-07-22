@@ -39,14 +39,25 @@
     list-style: none;
   }
 
+  @media (max-width: 1200px) {
+    nav {
+      display: flex;
+      justify-content: space-around;
+    }
+  }
   /*BUSCADOR*/
 
       nav #search-bar {
         display: flex;
         align-items: center;
         position: relative;
-        gap: 0;
         width: 600px; /* Ancho del buscador */
+      }
+
+      @media (max-width: 1200px) {
+        nav #search-bar {
+          width: 60%; /* Ancho del buscador en pantallas pequeñas */
+        }
       }
 
       /*Input de búsqueda*/
@@ -127,3 +138,51 @@
         max-width: 25px; /* Ancho máximo de la imagen */
         max-height: 25px; /* Alto máximo de la imagen */
       }
+
+      .menu-active{
+        display: block;
+      }
+
+      @media (max-width: 1200px) {
+        .menu-option {
+          display: none;
+          position: absolute;
+          top: 70px; /* ajusta según la altura de tu menú */
+          right: 10px;
+          flex-direction: column;
+          background-color: #114d9b;
+          padding: 5px;
+          gap: 10px;
+          border-radius: 8px;
+          z-index: 999;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+          width: 120px; /* o auto si lo prefieres */
+        }
+
+        .menu-option.menu-active {
+          display: flex;
+        }
+      }
+
+      .menu-responsive {
+        display: none; /* Oculto por defecto */
+      }
+
+      /* Mostrar el icono de menú hamburguesa en pantallas pequeñas */
+      @media (max-width: 1200px) {
+        .menu-responsive {
+          display: block; /* Mostrar en pantallas pequeñas */
+          max-width: 40px; /* Ancho del icono de menú hamburguesa */
+          max-height: 40px; /* Alto del icono de menú hamburguesa */
+        }
+
+        .menu-responsive:hover {
+          cursor: pointer; /* Cambia el cursor al pasar el mouse */
+          opacity: 0.8; /* Efecto al pasar el mouse */
+        }
+
+        .menu-responsive:active {
+          opacity: 0.6; /* Efecto al hacer clic */
+        }
+      }
+    
