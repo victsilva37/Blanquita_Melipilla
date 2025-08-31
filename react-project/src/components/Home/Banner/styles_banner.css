@@ -1,13 +1,12 @@
 #banner-content{
     display: flex;
     justify-content: center;
-    margin-top: 75px;
+    margin-top: 20px;
     height: 450px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     #banner-content {
-        margin-top: 75px;
         display: flex;
         justify-content: center;
         align-items: center;

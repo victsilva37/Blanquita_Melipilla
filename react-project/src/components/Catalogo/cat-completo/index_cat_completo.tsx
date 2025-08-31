@@ -24,13 +24,16 @@ export default function CatCompleto() {
                             />
 
                             {/* Botón para ver detalle del producto */}
-                            <button
+                            {/* <button
                                 disabled={producto.precio_unitario === 0}
                                 className="btn btn-primary"
                                 onClick={() => abrirModal(producto)}
                             >
                                 VER DETALLE
-                            </button>
+                                
+                            </button> */}
+
+                            <h5>$ <strong> {Math.round(producto.precio_unitario)}</strong> c/u</h5>
                         </div>
                     ))
                 ) : (

@@ -54,10 +54,19 @@
         align-self: center;
     }
 
+
+/*PRECIO DEL PRODUCTO*/
+
+    #productos-content h5 {
+        text-align: center;
+        font-size: 25px;
+        color: #000000;
+    }
+
     
 /* BOTON VER DETALLE */
 
-    #productos-content .btn {
+    /* #productos-content .btn {
         margin-top: 10px;
         width: 100%;
         height: 40px;
@@ -68,7 +77,7 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
-    }
+    } */
 
 
 /*Component: MODAL-PRODUCTO*/
