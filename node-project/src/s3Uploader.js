@@ -12,14 +12,14 @@ async function uploadToS3(fileBuffer, fileName) {
     Bucket: process.env.AWS_BUCKET_NAME,
     Key: fileName,
     Body: fileBuffer,
-    ContentType: "image/jpeg",
     ACL: "public-read",
+    ContentType: "image/jpeg",
   };
 
   return new Promise((resolve, reject) => {
     s3.upload(params, (err, data) => {
-      if (err) reject(err);
-      else resolve(data);
+      if (err) return reject(err);
+      resolve(data);
     });
   });
 }
