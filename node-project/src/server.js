@@ -35,33 +35,33 @@ app.get("/api/productos", authenticateToken, async (req, res) => {
 });
 
 // POST producto con imagen
-app.post("/api/productos", authenticateToken, upload.single("img_producto"), async (req, res) => {
+app.post("/api/productos", upload.single("img_producto"), async (req, res) => {
   try {
     const { nombre_producto, precio_unitario, precio_x_mayor, desc_breve } = req.body;
-    if (!nombre_producto || !precio_unitario || !desc_breve || !req.file)
-      return res.status(400).json({ message: "Faltan campos obligatorios." });
+    if (!req.file || !nombre_producto || !precio_unitario || !desc_breve)
+      return res.status(400).json({ message: "Faltan campos obligatorios" });
 
     const fileName = `${Date.now()}-${nombre_producto}.jpg`;
     const uploadResult = await uploadToS3(req.file.buffer, fileName);
 
     const query = `
-      INSERT INTO producto (nombre_producto, precio_unitario, precio_x_mayor, img_producto, desc_breve)
-      VALUES ($1,$2,$3,$4,$5) RETURNING *;
+      INSERT INTO producto (nombre_producto, precio_unitario, precio_x_mayor, desc_breve, img_producto)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *;
     `;
     const values = [
       nombre_producto,
       parseFloat(precio_unitario),
       precio_x_mayor ? parseFloat(precio_x_mayor) : null,
-      uploadResult.Location,
       desc_breve,
+      uploadResult.Location,
     ];
 
     const result = await pool.query(query, values);
-    io.emit("productoCreado", result.rows[0]);
     res.status(201).json(result.rows[0]);
   } catch (err) {
     console.error("Error al crear producto:", err);
-    res.status(500).json({ message: "Error al crear producto." });
+    res.status(500).json({ message: "Error al crear producto" });
   }
 });
 

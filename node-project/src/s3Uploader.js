@@ -7,23 +7,21 @@ const s3 = new AWS.S3({
   region: process.env.AWS_REGION,
 });
 
-async function uploadToS3(buffer, fileName) {
+async function uploadToS3(fileBuffer, fileName) {
   const params = {
     Bucket: process.env.AWS_BUCKET_NAME,
     Key: fileName,
-    Body: buffer,
+    Body: fileBuffer,
+    ContentType: "image/jpeg",
     ACL: "public-read",
-    ContentType: "image/jpeg", // o detectarlo dinámicamente
   };
 
-  try {
-    const data = await s3.upload(params).promise();
-    console.log("Imagen subida a S3:", data.Location);
-    return data;
-  } catch (error) {
-    console.error("Error subiendo a S3:", error);
-    throw error;
-  }
+  return new Promise((resolve, reject) => {
+    s3.upload(params, (err, data) => {
+      if (err) reject(err);
+      else resolve(data);
+    });
+  });
 }
 
 module.exports = { uploadToS3 };
