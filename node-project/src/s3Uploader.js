@@ -7,21 +7,23 @@ const s3 = new AWS.S3({
   region: process.env.AWS_REGION,
 });
 
-async function uploadToS3(fileBuffer, fileName, mimeType = "image/jpeg") {
+async function uploadToS3(buffer, fileName) {
   const params = {
     Bucket: process.env.AWS_BUCKET_NAME,
     Key: fileName,
-    Body: fileBuffer,
-    ContentType: mimeType,
-    ACL: "public-read", // Para que la imagen sea accesible públicamente
+    Body: buffer,
+    ACL: "public-read",
+    ContentType: "image/jpeg", // o detectarlo dinámicamente
   };
 
-  return new Promise((resolve, reject) => {
-    s3.upload(params, (err, data) => {
-      if (err) return reject(err);
-      resolve(data); // data.Location será la URL pública
-    });
-  });
+  try {
+    const data = await s3.upload(params).promise();
+    console.log("Imagen subida a S3:", data.Location);
+    return data;
+  } catch (error) {
+    console.error("Error subiendo a S3:", error);
+    throw error;
+  }
 }
 
 module.exports = { uploadToS3 };
