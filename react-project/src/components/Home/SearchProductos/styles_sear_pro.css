@@ -41,6 +41,14 @@
         text-overflow: ellipsis; /* Agrega puntos suspensivos */
     }
 
+     #search-productos-content  h5 {
+        text-align: center;
+        align-self: center;
+        font-size: 25px;
+        color: #000000;
+    }
+
+
     #search-productos-content .productos-lista .producto-item .btn {
         margin-top: 10px;
         width: 100%;

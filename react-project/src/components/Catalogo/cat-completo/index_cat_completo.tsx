@@ -3,7 +3,15 @@ import { useProductosCompletos } from "./func_cat_completo";
 import './styles_cat_completo.css'
 
 export default function CatCompleto() {
-    const { productosMostrados, abrirModal, cerrarModal, productoSeleccionado } = useProductosCompletos();
+    const {
+    productosMostrados,
+    abrirModal,
+    cerrarModal,
+    productoSeleccionado,
+    paginaActual,
+    setPaginaActual,
+    totalPaginas,
+  } = useProductosCompletos();
     return (
         <div>
             <h1>Catálogo Completo</h1>
@@ -23,27 +31,49 @@ export default function CatCompleto() {
                                 alt={producto.nombre_producto}
                             />
 
-                            {/* Botón para ver detalle del producto */}
-                            {/* <button
-                                disabled={producto.precio_unitario === 0}
-                                className="btn btn-primary"
-                                onClick={() => abrirModal(producto)}
-                            >
-                                VER DETALLE
-                                
-                            </button> */}
-
+                            {/* Precio unitario */}
                             <h5>$ <strong> {Math.round(producto.precio_unitario)}</strong> c/u</h5>
+
                         </div>
                     ))
                 ) : (
                     <p>Cargando productos...</p>
                 )}
 
-                {productoSeleccionado && (
+                {/* {productoSeleccionado && (
                     <ModalProducto producto={productoSeleccionado} cerrarModal={cerrarModal} />
-                )}
+                )} */}
+
+                
             </div>
+
+            {/*PAGINATION*/}
+
+              <div className="pagination">
+                <button
+                  onClick={() => setPaginaActual((prev) => Math.max(prev - 1, 1))}
+                  disabled={paginaActual === 1}
+                >
+                  ◀ Anterior
+                </button>
+
+                {Array.from({ length: totalPaginas }, (_, i) => (
+                  <button
+                    key={i + 1}
+                    onClick={() => setPaginaActual(i + 1)}
+                    className={paginaActual === i + 1 ? "active" : ""}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+
+                <button
+                  onClick={() => setPaginaActual((prev) => Math.min(prev + 1, totalPaginas))}
+                  disabled={paginaActual === totalPaginas}
+                >
+                  Siguiente ▶
+                </button>
+              </div>
         </div>
     );
 }

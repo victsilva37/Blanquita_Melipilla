@@ -9,11 +9,12 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 export function useProductosCompletos() {
   const [productos, setProductos] = useState<Producto[]>([]);
   const [productoSeleccionado, setProductoSeleccionado] = useState<Producto | null>(null);
-  const [paginaActual] = useState(1);
+
+  // 🔹 Estados para paginación
+  const [paginaActual, setPaginaActual] = useState(1);
   const productosPorPagina = 30;
 
   useEffect(() => {
-    // Socket solo si es compatible (Render no siempre lo es)
     const socket = io(BACKEND_URL, {
       transports: ["websocket", "polling"],
     });
@@ -22,24 +23,17 @@ export function useProductosCompletos() {
       setProductos((prevProductos) => [...prevProductos, nuevoProducto]);
     });
 
-    // Función para obtener productos desde la API
     const fetchProductos = () => {
       axios
         .get(`${BACKEND_URL}/api/productos`, {
           headers: { Authorization: `Bearer ${API_TOKEN}` },
         })
-        .then((response) => {
-          setProductos(response.data);
-        })
-        .catch((error) => {
-          console.error("Error al obtener productos:", error);
-        });
+        .then((response) => setProductos(response.data))
+        .catch((error) => console.error("Error al obtener productos:", error));
     };
 
-    // Llamada inicial
     fetchProductos();
 
-    // Polling cada 5 segundos
     const intervalId = setInterval(fetchProductos, 5000);
 
     return () => {
@@ -48,20 +42,25 @@ export function useProductosCompletos() {
     };
   }, []);
 
-  // Calcular productos por página
-  const productosMostrados = productos.slice(
-    (paginaActual - 1) * productosPorPagina,
-    paginaActual * productosPorPagina
-  );
+  // 🔹 Calcular productos para la página actual
+  const indexOfLast = paginaActual * productosPorPagina;
+  const indexOfFirst = indexOfLast - productosPorPagina;
+  const productosMostrados = productos.slice(indexOfFirst, indexOfLast);
+
+  // 🔹 Número total de páginas
+  const totalPaginas = Math.ceil(productos.length / productosPorPagina);
 
   // Modal handlers
-  const abrirModal = (producto: Producto) => {
-    setProductoSeleccionado(producto);
-  };
+  const abrirModal = (producto: Producto) => setProductoSeleccionado(producto);
+  const cerrarModal = () => setProductoSeleccionado(null);
 
-  const cerrarModal = () => {
-    setProductoSeleccionado(null);
+  return {
+    productosMostrados,
+    abrirModal,
+    cerrarModal,
+    productoSeleccionado,
+    paginaActual,
+    setPaginaActual,
+    totalPaginas,
   };
-
-  return { productosMostrados, abrirModal, cerrarModal, productoSeleccionado };
 }

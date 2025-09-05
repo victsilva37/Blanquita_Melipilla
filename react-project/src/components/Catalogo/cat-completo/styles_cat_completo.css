@@ -5,10 +5,8 @@
     height: auto;
     margin: auto;
     margin-top: 70px;
-    display: flex;
+    display: grid;
     grid-template-columns: repeat(5, 1fr);
-    flex-wrap: wrap;
-    justify-content: center;
     gap: 40px;
     padding: 10px;
     border-radius: 8px;
@@ -48,22 +46,6 @@
         align-self: center;
     }
 
-    
-/* BOTON VER DETALLE */
-
-    /* #cat-completo-content .btn {
-        margin-top: 10px;
-        width: 100%;
-        height: 40px;
-        font-family: "Karantina", system-ui;
-        font-size: 16px;
-        background-color: #0f53ac;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    } */
-
 
 /*PRECIO DEL PRODUCTO*/
 
@@ -75,9 +57,39 @@
     }
 
 
+/*PAGINATION*/
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+        gap: 6px;
+    }
+
+    .pagination button {
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        background: white;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .pagination button.active {
+        background: #007bff;
+        color: white;
+        font-weight: bold;
+    }
+
+    .pagination button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+
+
 /*Component: MODAL-PRODUCTO*/
 
-    #modal-producto {
+    /* #modal-producto {
         position: fixed;
         top: 0;
         left: 0;
@@ -90,7 +102,7 @@
         align-items: center;
     }
 
-
+ */
 
 
 

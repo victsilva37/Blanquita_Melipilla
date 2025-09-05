@@ -31,11 +31,17 @@ export default function SearchProductos({ termino }: SearchProductosProps) {
             ) : (
             productosMostrados.map((producto) => (
                 <div className="producto-item"  key={producto.id_producto}>
-                    <img src={producto.img_producto} alt={producto.nombre_producto} />
                     <h4>{producto.nombre_producto}</h4>
-                    <button disabled className="btn btn-primary"
+
+                    {/* Imagen del producto */}
+                    <img src={producto.img_producto} alt={producto.nombre_producto} />
+
+                    {/* Precio unitario */}
+                    <h5>$ <strong> {Math.round(producto.precio_unitario)}</strong> c/u</h5>
+                    
+                    {/* <button disabled className="btn btn-primary"
                         onClick={() => abrirModal(producto)}>VER DETALLE
-                    </button>
+                    </button> */}
                 </div>
             ))
             )}
