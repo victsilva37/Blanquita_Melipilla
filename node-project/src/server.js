@@ -18,11 +18,8 @@ app.use("/api/productos", productoRoutes);
 app.use("/api", authRoutes);
 
 // Servir frontend (React Vite / dist)
-app.use(express.static(path.join(__dirname, "../../react-project/dist")));
-
-// Catch-all: cualquier ruta que no sea /api
-app.get(/^(?!\/api).*/, (req, res) => {
-  res.sendFile(path.join(__dirname, "../../react-project/dist/index.html"));
+app.get("/catalogo/*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../../react-project/dist/index.html"));
 });
 
 // Servidor
