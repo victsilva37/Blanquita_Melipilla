@@ -6,7 +6,7 @@ const router = express.Router();
 
 //ENDPOINTS
 // Endpoint de autenticación login
-router.post("/api/login", (req, res) => {
+router.post("/login", (req, res) => {
   const { username, password } = req.body;
 
   if (
