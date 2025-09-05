@@ -17,17 +17,16 @@ const authRoutes = require("./endpoints/login_auth");
 app.use("/api/productos", productoRoutes);
 app.use("/api", authRoutes);
 
-// Servir frontend
-app.use(express.static(path.join(__dirname, "dist"))); // 👈 tu carpeta compilada de React
+// Servir frontend (React Vite / dist)
+app.use(express.static(path.join(__dirname, "../../react-project/dist")));
 
-// Catch-all para React Router
-app.get(/.*/, (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+// Catch-all: cualquier ruta que no sea /api
+app.get(/^(?!\/api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "../../react-project/dist/index.html"));
 });
 
-
-// Server
+// Servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+  console.log(`Servidor corriendo en puerto ${PORT}`);
 });
