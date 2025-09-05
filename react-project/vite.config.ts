@@ -3,5 +3,5 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/', // Asegúrate de que la base esté configurada a '/'
+  base: './', // <- Esto es clave para rutas relativas
 });
