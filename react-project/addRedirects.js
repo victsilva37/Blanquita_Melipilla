@@ -1,7 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 
-const buildPath = path.join(__dirname, "build", "_redirects");
+// Ruta al dist
+const distPath = path.join(__dirname, "dist", "_redirects");
 
-fs.writeFileSync(buildPath, "/* /index.html 200");
-console.log("_redirects file created!");
+fs.writeFileSync(distPath, "/* /index.html 200");
+console.log("_redirects file created in dist!");
