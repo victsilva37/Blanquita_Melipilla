@@ -5,8 +5,9 @@
     height: auto;
     margin: auto;
     margin-top: 70px;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 40px;
     padding: 10px;
     border-radius: 8px;
