@@ -3,6 +3,8 @@ import { useBusquedaProductos } from "./func_sear_pro";
 import ModalProducto from "../MainProductos/modalProducto/index_modal_pro";
 import "./styles_sear_pro.css";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 interface SearchProductosProps {
   termino: string;
   cancelarBusqueda: () => void;
@@ -34,7 +36,7 @@ export default function SearchProductos({ termino }: SearchProductosProps) {
                     <h4>{producto.nombre_producto}</h4>
 
                     {/* Imagen del producto */}
-                    <img src={producto.img_producto} alt={producto.nombre_producto} />
+                    <img src={`${BACKEND_URL}${producto.img_producto}`} alt={producto.nombre_producto} />
 
                     {/* Precio unitario */}
                     <h5>$ <strong> {Math.round(producto.precio_unitario)}</strong> c/u</h5>
