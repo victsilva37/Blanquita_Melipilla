@@ -2,6 +2,7 @@ import "./styles_productos.css";
 import { useProductos } from "./func_productos";
 import ModalProducto from "./modalProducto/index_modal_pro";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function MainProductos() {
   const { productosMostrados, abrirModal, cerrarModal, productoSeleccionado } = useProductos();
@@ -29,7 +30,7 @@ export default function MainProductos() {
                 {/* IMAGEN DEL PRODUCTO */}
 
                   <img
-                    src={producto.img_producto}
+                    src={`${BACKEND_URL}${producto.img_producto}`}
                     className="card-img-top"
                     alt={producto.nombre_producto}
                   />

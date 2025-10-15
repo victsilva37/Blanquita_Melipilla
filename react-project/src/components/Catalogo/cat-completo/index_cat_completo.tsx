@@ -2,6 +2,8 @@ import ModalProducto from "../../Home/MainProductos/modalProducto/index_modal_pr
 import { useProductosCompletos } from "./func_cat_completo";
 import './styles_cat_completo.css'
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export default function CatCompleto() {
     const {
     productosMostrados,
@@ -26,7 +28,7 @@ export default function CatCompleto() {
                             
                             {/* Imagen del producto */}
                             <img
-                                src={producto.img_producto}
+                                src={`${BACKEND_URL}${producto.img_producto}`}
                                 className="card-img-top"
                                 alt={producto.nombre_producto}
                             />
