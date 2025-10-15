@@ -12,7 +12,7 @@ Este proyecto nace como parte de un aprendizaje autónomo, combinando tecnologí
 | TypeScript       | Tipado estático                     |
 | Express.js       | Servidor backend REST API           |
 | PostgreSQL       | Base de datos relacional            |
-| AWS S3           | Almacenamiento de imágenes          |
+| AWS S3           | Almacenamiento de imágenes (temporalmente descartado por cuenta suspendida f)|
 | Socket.IO        | Comunicación en tiempo real         |
 | Render.com       | Hosting backend/frontend            |
 | JWT              | Autenticación por token             |
@@ -62,58 +62,9 @@ Para mantener un código modular y ordenado, se utiliza una nomenclatura especí
 Cada carpeta principal dentro del proyecto está organizada para que los elementos correspondientes a cada layout o pestaña de la aplicación estén claramente diferenciados. Esto sigue un enfoque modular, donde cada funcionalidad de la app (Inicio, Menú, Información) tiene sus propios submódulos o componentes distribuidos en las carpetas principales.
 
 
-## Entorno de desarrollo
+## Producto final
 
-### Requisitos previos
+Con todo esto, el proyecto se encuentra desplegado desde Render y lo puedes ver accediendo a esta url [](https://blanquitamelipilla-react.onrender.com)
 
-Para una correcta ejecución de proyecto, asegúrate de tener instalado lo siguiente en tu equipo:
 
-* Node.js v18 o superior (incluye npm)
-
-El backend ya está desplegado y configurado en la nube de Render, por lo que no es necesario ejecutarlo localmente.
-
-### Pasos para ejecución
-
-1. Clonar el repositorio.
-
-```bash
-git clone https://github.com/victsilva37/blanquita-melipilla.git
-```
-
-2. Entrar al proyecto del frontend.
-
-```bash
-cd react-project
-```
-
-3. Instalar las dependencias
-
-```bash
-npm install
-```
-
-4. Iniciar la aplicación en modo desarrollo
-
-```bash
-npm run dev
-```
-
-### Seguridad y autenticación
-
-La aplicación implementa un sistema de autenticación mediante JWT (JSON Web Tokens) para proteger el acceso a los recursos del backend. La mayoría de las rutas están protegidas con middleware que verifica la validez del token JWT enviado en el header Authorization.
-
-Los tokens tienen una duración de 7 días (168h) por motivos de seguridad.
-
-El flujo de autenticación consiste en lo siguiente: 
-
-* Se realiza a través de una petición POST al endpoint /api/login.
-
-* Se validan las credenciales contra variables de entorno (USERNAME y PASSWORD).
-
-* Si las credenciales son válidas, se genera y retorna un JWT firmado.
-
-Por seguridad, el token no se almacena en el frontend permanentemente y se renueva manualmente cuando expira utilizando Postman.
-Además es almacenado como variable de entorno dentro del proyecto React.
-
-Esta estructura permite mantener el backend protegido, mientras que el frontend puede consumir los datos de forma controlada y segura.
 
