@@ -12,7 +12,7 @@ export function useProductosCompletos() {
 
   // 🔹 Estados para paginación
   const [paginaActual, setPaginaActual] = useState(1);
-  const productosPorPagina = 30;
+  const productosPorPagina = 15;
 
   useEffect(() => {
     const socket = io(BACKEND_URL, {

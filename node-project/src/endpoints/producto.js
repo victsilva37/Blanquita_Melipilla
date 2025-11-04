@@ -1,106 +1,99 @@
-// IMPORTACIONES Y CONSTANTES
 const express = require("express");
 const router = express.Router();
-const pool = require("../config/database");
-
-// const { uploadFileToS3 } = require("../config/aws_S3"); // ← Descomentar cuando uses AWS
+const supabase = require("../config/database");
+const { uploadFileToBucket } = require("../config/storage");
 const authenticateToken = require("./login_auth");
-
 const multer = require("multer");
-const path = require("path");
-const fs = require("fs");
 
-// --- CONFIGURAR UPLOAD LOCAL ---
-const uploadDir = path.join(__dirname, "../uploads");
-
-// Si la carpeta no existe, crearla automáticamente
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-// Configuración de Multer para guardar en /uploads
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    const uniqueName = Date.now() + "-" + file.originalname;
-    cb(null, uniqueName);
-  }
-});
-
+// Configurar multer en memoria
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-// --- CREAR PRODUCTO ---
+// --- Crear producto ---
 router.post("/", authenticateToken, upload.single("imagen_producto"), async (req, res) => {
   try {
     const { nombre_producto, precio_unitario, precio_por_mayor, stock } = req.body;
+    const fileUrl = req.file ? await uploadFileToBucket(req.file) : null;
 
-    // Si hay imagen, construir la URL local
-    const fileUrl = req.file ? `/uploads/${req.file.filename}` : null;
+    const { data, error } = await supabase
+      .from("producto")
+      .insert([
+        {
+          nombre_producto,
+          precio_unitario,
+          precio_x_mayor: precio_por_mayor,
+          stock,
+          img_producto: fileUrl
+        }
+      ])
+      .select("*");
 
-    const result = await pool.query(
-      `INSERT INTO producto (nombre_producto, precio_unitario, precio_x_mayor, stock, img_producto) 
-       VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-      [nombre_producto, precio_unitario, precio_por_mayor, stock, fileUrl]
-    );
+    if (error) throw error;
 
-    res.json({ message: "Producto insertado correctamente", producto: result.rows[0] });
+    res.json({ message: "Producto insertado correctamente", producto: data[0] });
   } catch (error) {
     console.error("Error al insertar producto:", error);
     res.status(500).json({ error: "Error al insertar producto" });
   }
 });
 
-// --- OBTENER TODOS LOS PRODUCTOS ---
+// --- Obtener todos los productos ---
 router.get("/", async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM producto ORDER BY id DESC");
-    res.json(result.rows);
+    const { data, error } = await supabase
+      .from("producto")
+      .select("*")
+      .order("id", { ascending: false });
+
+    if (error) throw error;
+
+    res.json(data);
   } catch (error) {
     console.error("Error al obtener productos:", error);
     res.status(500).json({ error: "Error al obtener productos" });
   }
 });
 
-// --- ACTUALIZAR PRODUCTO ---
+// --- Actualizar producto ---
 router.put("/:id", authenticateToken, upload.single("imagen_producto"), async (req, res) => {
   try {
     const { id } = req.params;
     const { nombre_producto, precio_unitario, precio_por_mayor, stock } = req.body;
 
-    let fileUrl = null;
+    const fileUrl = req.file ? await uploadFileToBucket(req.file) : null;
 
-    if (req.file) {
-      fileUrl = `/uploads/${req.file.filename}`;
-    }
+    const updateData = {
+      nombre_producto,
+      precio_unitario,
+      precio_x_mayor: precio_por_mayor,
+      stock
+    };
 
-    const result = await pool.query(
-      `UPDATE producto 
-       SET nombre_producto=$1, precio_unitario=$2, precio_x_mayor=$3, stock=$4, 
-           img_producto=COALESCE($5, img_producto)
-       WHERE id=$6 RETURNING *`,
-      [nombre_producto, precio_unitario, precio_por_mayor, stock, fileUrl, id]
-    );
+    if (fileUrl) updateData.img_producto = fileUrl;
 
-    if (result.rows.length === 0)
-      return res.status(404).json({ error: "Producto no encontrado" });
+    const { data, error } = await supabase
+      .from("producto")
+      .update(updateData)
+      .eq("id", id)
+      .select("*");
 
-    res.json({ message: "Producto actualizado correctamente", producto: result.rows[0] });
+    if (error) throw error;
+    if (!data.length) return res.status(404).json({ error: "Producto no encontrado" });
+
+    res.json({ message: "Producto actualizado correctamente", producto: data[0] });
   } catch (error) {
     console.error("Error al actualizar producto:", error);
     res.status(500).json({ error: "Error al actualizar producto" });
   }
 });
 
-// --- ELIMINAR PRODUCTO ---
+// --- Eliminar producto ---
 router.delete("/:id", authenticateToken, async (req, res) => {
   try {
     const { id } = req.params;
-    const result = await pool.query("DELETE FROM producto WHERE id=$1 RETURNING *", [id]);
 
-    if (result.rows.length === 0)
-      return res.status(404).json({ error: "Producto no encontrado" });
+    const { error } = await supabase.from("producto").delete().eq("id", id);
+    if (error) throw error;
 
     res.json({ message: "Producto eliminado correctamente" });
   } catch (error) {

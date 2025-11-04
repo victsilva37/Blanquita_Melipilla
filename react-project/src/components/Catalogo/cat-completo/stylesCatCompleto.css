@@ -1,10 +1,15 @@
+/*TITULO DE LA SECCIÓN*/
 
+    h1{
+        text-align: center;
+        margin-top: 20px;
+    }
 
 #cat-completo-content {
     width: 90%;
     height: auto;
     margin: auto;
-    margin-top: 70px;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -53,6 +58,7 @@
     #cat-completo-content h5 {
         text-align: center;
         align-self: center;
+        font-weight: 100;
         font-size: 25px;
         color: #000000;
     }

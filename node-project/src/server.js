@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+// require("tslib");
+
 
 const app = express();
 
@@ -9,15 +11,16 @@ const app = express();
 app.use(cors({ origin: "*" }));
 app.use(express.json());
 
-// --- SERVIR ARCHIVOS SUBIDOS LOCALMENTE ---
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
 // --- IMPORTAR Y USAR RUTAS ---
-const productoRoutes = require("./endpoints/producto");
-const authRoutes = require("./endpoints/login_auth");
 
-app.use("/api/productos", productoRoutes);
+//LOGIN_AUTH
+const authRoutes = require("./endpoints/login_auth");
 app.use("/api", authRoutes);
+
+//PRODUCTO
+const productoRoutes = require("./endpoints/producto");
+app.use("/api/productos", productoRoutes);
+
 
 // --- INICIAR SERVIDOR ---
 const PORT = process.env.PORT || 3000;

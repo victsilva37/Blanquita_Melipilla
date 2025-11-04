@@ -1,24 +1,30 @@
-import ModalProducto from "../../Home/MainProductos/modalProducto/index_modal_pro";
-import { useProductosCompletos } from "./func_cat_completo";
-import './styles_cat_completo.css'
+// import ModalProducto from "../../Home/MainProductos/modalProducto/index_modal_pro";
+import { useProductosCompletos } from "./useCatCompleto";
+import './stylesCatCompleto.css'
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+// const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function CatCompleto() {
     const {
     productosMostrados,
-    abrirModal,
-    cerrarModal,
-    productoSeleccionado,
+    // abrirModal,
+    // cerrarModal,
+    // productoSeleccionado,
     paginaActual,
     setPaginaActual,
     totalPaginas,
   } = useProductosCompletos();
     return (
         <div>
-            <h1>Catálogo Completo</h1>
+
+          
+            {/*TITULO DE LA SECCIÓN*/}
+
+            <h1>Catálogo</h1>
+
             {/* Aquí puedes agregar el contenido del catálogo completo */}
             <div id="cat-completo-content">
+              
                 {productosMostrados.length > 0 ? (
                     productosMostrados.map((producto) => (
                         <div key={producto.id_producto} className="card" id="card-producto">
@@ -28,7 +34,7 @@ export default function CatCompleto() {
                             
                             {/* Imagen del producto */}
                             <img
-                                src={`${BACKEND_URL}${producto.img_producto}`}
+                                src={`${producto.img_producto}`}
                                 className="card-img-top"
                                 alt={producto.nombre_producto}
                             />

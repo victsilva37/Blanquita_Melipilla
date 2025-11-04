@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import Catalogo from './pages/Catalogo';
+// import Catalogo from './pages/Catalogo';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <Route path="/" element={<Home />} />
 
       {/* Ruta para la página de Catalogo */}
-      <Route path="/catalogo" element={<Catalogo />} />
+      {/* <Route path="/catalogo" element={<Catalogo />} /> */}
       
     </Routes>
   );

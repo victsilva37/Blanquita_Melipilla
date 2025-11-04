@@ -2,10 +2,9 @@ import "./styles_productos.css";
 import { useProductos } from "./func_productos";
 import ModalProducto from "./modalProducto/index_modal_pro";
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function MainProductos() {
-  const { productosMostrados, abrirModal, cerrarModal, productoSeleccionado } = useProductos();
+  const { productosMostrados, cerrarModal, productoSeleccionado } = useProductos();
 
 
   return (
@@ -17,23 +16,21 @@ export default function MainProductos() {
         <div id="productos-content">
 
           {productosMostrados.length > 0 ? (
-            productosMostrados.slice(-4).map((producto) => (
-              // Renderizar cada producto
-              // Usar key para identificar cada elemento de la lista
+            productosMostrados.slice(0,4).map((producto) => (
               <div key={producto.id_producto} className="card" id="card-producto">
+
+                {/* IMAGEN DEL PRODUCTO */}
+
+                  <img
+                    src={`${producto.img_producto}`}
+                    className="card-img-top"
+                    alt={producto.nombre_producto}
+                  />
 
                 {/* NOMBRE DEL PRODUCTO */}
 
                   <h4 className="card-title">{producto.nombre_producto}</h4>
                   
-
-                {/* IMAGEN DEL PRODUCTO */}
-
-                  <img
-                    src={`${BACKEND_URL}${producto.img_producto}`}
-                    className="card-img-top"
-                    alt={producto.nombre_producto}
-                  />
 
                 {/* BOTÓN VER DETALLE */}
 
@@ -43,6 +40,7 @@ export default function MainProductos() {
                     onClick={() => abrirModal(producto)}
                     >
                     VER DETALLE
+      
                     </button> */}
                 <h5>$ <strong> {Math.round(producto.precio_unitario)}</strong> c/u</h5>
               </div>

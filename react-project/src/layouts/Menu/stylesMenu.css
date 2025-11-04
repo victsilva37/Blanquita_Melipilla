@@ -1,0 +1,122 @@
+#menu-content {
+  background-color: #216ccf;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-sizing: border-box;
+  padding: 0 20px; /* espacio lateral */
+}
+
+/* Ajustes automáticos para pantallas pequeñas */
+@media (max-width: 768px) {
+  #menu-content {
+    flex-direction: row;
+    padding: 5px 15px;
+  }
+}
+
+/* LOGO */
+#menu-content img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+/* NAVBAR */
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+  position: relative;
+}
+
+@media (max-width: 1200px) {
+  nav {
+    display: flex;
+    justify-content: flex-end; /* menú hamburguesa a la derecha */
+    align-items: center;
+  }
+}
+
+/* OPCIONES DEL MENÚ */
+.menu-option {
+  margin-top: 20px;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  display: flex;
+  justify-content: end;
+  gap: 100px;
+  align-items: center;
+  list-style: none;
+}
+
+.menu-option a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 25px;
+  font-weight: 400;
+  transition: background-color 0.3s ease;
+}
+
+.menu-option a:hover {
+  opacity: 0.8;
+}
+
+/* Imagen dentro del menú (si la usas) */
+.menu-option img {
+  max-width: 25px;
+  max-height: 25px;
+}
+
+/* MENÚ DESPLEGABLE MÓVIL */
+@media (max-width: 1200px) {
+  .menu-option {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 0;
+    flex-direction: column;
+    background-color: #114d9b;
+    padding: 10px;
+    gap: 10px;
+    border-radius: 8px;
+    z-index: 999;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 140px;
+  }
+
+  .menu-option.menu-active {
+    display: flex;
+  }
+}
+
+/* ÍCONO MENÚ HAMBURGUESA */
+.menu-responsive {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .menu-responsive {
+    display: block;
+    max-width: 40px;
+    max-height: 40px;
+    margin-left: auto; /* empuja el icono a la derecha */
+  }
+
+  .menu-responsive:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+
+  .menu-responsive:active {
+    opacity: 0.6;
+  }
+}
