@@ -64,7 +64,7 @@ Cada carpeta principal dentro del proyecto está organizada para que los element
 
 ## Producto final
 
-Con todo esto, el proyecto se encuentra desplegado desde Render y lo puedes ver accediendo a esta [url](https://blanquitamelipilla-react.onrender.com](https://blanquita-melipilla-front.vercel.app)
+Con todo esto, el proyecto se encuentra desplegado desde Render y lo puedes ver accediendo a esta [url](https://blanquita-melipilla-front.vercel.app)
 
 
 
