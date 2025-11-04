@@ -12,9 +12,9 @@ Este proyecto nace como parte de un aprendizaje autónomo, combinando tecnologí
 | TypeScript       | Tipado estático                     |
 | Express.js       | Servidor backend REST API           |
 | PostgreSQL       | Base de datos relacional            |
-| AWS S3           | Almacenamiento de imágenes (temporalmente descartado por cuenta suspendida f)|
+| Supabase         | Almacenamiento de información (datos y archivos)|
 | Socket.IO        | Comunicación en tiempo real         |
-| Render.com       | Hosting backend/frontend            |
+| Vercel           | Hosting backend/frontend            |
 | JWT              | Autenticación por token             |
 
 ## Estructura del proyecto (Archivos y carpetas clave)
