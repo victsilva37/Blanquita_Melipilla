@@ -1,0 +1,43 @@
+
+#root, .main-container { /* Ajusta el selector según tu estructura */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    background-color: #216ccf;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-around;
+}
+
+footer #contacto-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+footer #contacto-content img{
+    width: 15px;
+    height: 15px;
+    object-fit: contain;
+    align-self: center;
+}
+
+footer #contacto-content p{
+    margin-top: 10px;
+}
+
+footer #contacto-content #p_number{
+    font-weight: 100;
+}
+
+
+footer #p_derechos-content{
+    font-weight: 100;
+    margin-bottom: 0;
+}
+
+

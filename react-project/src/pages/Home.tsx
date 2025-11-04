@@ -4,7 +4,7 @@ import CatCompleto from "../components/Catalogo/cat-completo/CatCompleto";
 import Banner from "../components/Home/Banner/index_banner";
 // import MainProductos from "../components/Home/MainProductos/index_productos";
 // import SearchProductos from "../components/Home/SearchProductos/index_sear_pro";
-import Footer from "../layouts/Footer/index_footer";
+import Footer from "../layouts/Footer/Footer";
 import Menu from "../layouts/Menu/Menu";
 // import { useLocation } from "react-router-dom";
 
